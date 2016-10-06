@@ -9,7 +9,7 @@ const hotScript = 'webpack-hot-middleware/client?path=__webpack_hmr&dynamicPubli
 const baseDevConfig = () => ({
   devtool: 'eval-cheap-module-source-map',
   entry: {
-    todoapp: [customPath, hotScript, path.join(__dirname, '../chrome/extension/todoapp')],
+    popup: [customPath, hotScript, path.join(__dirname, '../chrome/extension/popup')],
     background: [customPath, hotScript, path.join(__dirname, '../chrome/extension/background')],
   },
   devMiddleware: {
@@ -61,21 +61,8 @@ const baseDevConfig = () => ({
   }
 });
 
-const injectPageConfig = baseDevConfig();
-injectPageConfig.entry = [
-  customPath,
-  path.join(__dirname, '../chrome/extension/inject')
-];
-delete injectPageConfig.hotMiddleware;
-delete injectPageConfig.module.loaders[0].query;
-injectPageConfig.plugins.shift(); // remove HotModuleReplacementPlugin
-injectPageConfig.output = {
-  path: path.join(__dirname, '../dev/js'),
-  filename: 'inject.bundle.js',
-};
 const appConfig = baseDevConfig();
 
 module.exports = [
-  injectPageConfig,
   appConfig
 ];

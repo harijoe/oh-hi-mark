@@ -1,32 +1,12 @@
-const bluebird = require('bluebird');
-global.Promise = bluebird;
+import { wrapStore } from 'react-chrome-redux';
+import * as Actions from '../../app/actions/todos';
 
-function promisifier(method) {
-  // return a function
-  return function promisified(...args) {
-    // which returns a promise
-    return new Promise(resolve => {
-      args.push(resolve);
-      method.apply(this, args);
-    });
-  };
-}
+const initialState = {};
 
-function promisifyAll(obj, list) {
-  list.forEach(api => bluebird.promisifyAll(obj[api], { promisifier }));
-}
+const createStore = require('../../app/store/configureStore');
 
-// let chrome extension api support Promise
-promisifyAll(chrome, [
-  'tabs',
-  'windows',
-  'browserAction',
-  'contextMenus'
-]);
-promisifyAll(chrome.storage, [
-  'local',
-]);
+const store = createStore(initialState);
 
-require('./background/contextMenus');
-require('./background/inject');
-require('./background/badge');
+wrapStore(store, { portName: 'POPUP' });
+
+store.dispatch(Actions.sayHello('Julien'));
