@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 
 function Root(props) {
-  console.log(props);
   return (
     <p>
       Hello {props.message != null ? props.message : 'world!'}
