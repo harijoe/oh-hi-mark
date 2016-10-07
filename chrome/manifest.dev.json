@@ -8,13 +8,30 @@
     "default_popup": "popup.html"
   },
   "icons": {
-    "16": "img/icon-16.png",
-    "48": "img/icon-48.png",
-    "128": "img/icon-128.png"
+    "16": "img/icon/icon-saved-16.png",
+    "48": "img/icon/icon-saved-48.png",
+    "128": "img/icon/icon-saved-128.png"
   },
   "background": {
     "page": "background.html"
   },
-  "permissions": [ "management", "tabs", "storage" ],
+  "commands": {
+    "toggle-feature-save": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      },
+      "description": "Saves the page"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+U",
+        "chromeos": "Ctrl+Shift+U",
+        "linux": "Ctrl+Shift+J"
+      }
+    }
+  },
+  "permissions": [ "management", "tabs", "storage", "<all_urls>" ],
   "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
 }

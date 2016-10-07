@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import { combineReducers } from 'redux';
-import todos from './todos';
+import current from './current';
 
 const reducers = {
-  todos,
+  current,
 };
 
 // This is some magic to make the reducers work while keeping clean syntax in them
