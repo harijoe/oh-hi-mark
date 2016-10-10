@@ -4,7 +4,7 @@ import * as ActionTypes from '../constants/ActionTypes';
 import { setSaved } from '../actions/current';
 import { setLogo } from '../services/logo';
 import inject from '../services/inject';
-import { addDoc } from '../services/elasticlunr';
+import { addDoc, persistIndex } from '../services/elasticlunr';
 import { hashCode } from '../services/util';
 
 function* savePageSaga() {
@@ -33,6 +33,7 @@ function* handleExtractionSaga() {
   console.log('doc', doc);
 
   yield call(addDoc, doc);
+  yield call(persistIndex);
   console.log('SAVING');
 }
 

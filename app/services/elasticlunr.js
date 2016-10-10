@@ -1,4 +1,5 @@
 import elasticlunr from 'elasticlunr';
+import { INDEX_KEY } from '../constants/Storage';
 import _ from 'lodash';
 elasticlunr.clearStopWords();
 
@@ -18,16 +19,20 @@ const searchConfig = {
   }
 };
 
-export const initIndex = (serializedIndex = null) => {
-  if (serializedIndex !== null) {
-    index = elasticlunr.load(serializedIndex);
-    return;
-  }
-
+// TODO Add versioning to fields
+export const initIndex = () => {
   index = elasticlunr((config) => {
-    console.log('lunr', config);
     fields.map(field => config.addField(field));
   });
+};
+
+export const loadIndex = (serializedIndex) => {
+  console.log('serializedIndex', serializedIndex);
+  console.log('index', index);
+  if (serializedIndex !== null) {
+    index = elasticlunr.Index.load(serializedIndex);
+  }
+  console.log('index', index);
 };
 
 export const serialize = () => index.toJSON();
@@ -36,6 +41,10 @@ export const addDoc = (doc) => {
   index.addDoc(doc);
 
   console.log(serialize());
+};
+
+export const persistIndex = () => {
+  chrome.storage.local.set({ INDEX_KEY: serialize() });
 };
 
 // Check if rawResults is array
