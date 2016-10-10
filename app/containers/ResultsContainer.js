@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Root from '../components/Root';
+import Results from '../components/Results';
 
 export default connect(
-  state => Object.assign({},
-    { message: state.todos.message }
-  ),
+  state => Object.assign({}, {
+    results: state.search.results,
+  }),
   dispatch => ({ actions: bindActionCreators(Object.assign({},
   ), dispatch) })
-)(Root);
+)(Results);

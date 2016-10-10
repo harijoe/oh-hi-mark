@@ -1,9 +1,11 @@
 import { applyMiddleware, createStore, compose } from 'redux';
 import rootReducer from '../reducers';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
+import sagas from '../sagas';
 
+const sagaMiddleware = createSagaMiddleware();
 const enhancer = compose(
-  applyMiddleware(thunk),
+  applyMiddleware(sagaMiddleware),
   window.devToolsExtension ? window.devToolsExtension() : nope => nope
 );
 
@@ -16,5 +18,6 @@ export default function (initialState) {
       store.replaceReducer(nextRootReducer);
     });
   }
+  sagas.map(sagaMiddleware.run);
   return store;
 }

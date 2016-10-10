@@ -1,15 +1,17 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import SearchInputContainer from '../containers/SearchInputContainer';
+import ResultsContainer from '../containers/ResultsContainer';
 
-function Root(props) {
+function Root() {
   return (
-    <p>
-      Hello {props.message != null ? props.message : 'world!'}
-    </p>
+    <div>
+      <SearchInputContainer />
+      <ResultsContainer />
+    </div>
   );
 }
 
 Root.propTypes = {
-  message: PropTypes.string,
 };
 
 export default Root;

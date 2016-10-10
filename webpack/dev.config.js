@@ -15,7 +15,8 @@ const baseDevConfig = () => ({
   devMiddleware: {
     publicPath: `http://${host}:${port}/js`,
     stats: {
-      colors: true
+      colors: true,
+      errorDetails: true
     },
     noInfo: true
   },
@@ -40,7 +41,7 @@ const baseDevConfig = () => ({
     })
   ],
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.json']
   },
   module: {
     loaders: [{
@@ -57,7 +58,13 @@ const baseDevConfig = () => ({
         'css?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
         'postcss'
       ]
+    }, {
+      test: /\.json$/,
+      loader: 'json'
     }]
+  },
+  node: {
+    fs: 'empty'
   }
 });
 

@@ -2,16 +2,20 @@ import Immutable from 'immutable';
 import * as ActionTypes from '../constants/ActionTypes';
 
 const initialState = new Immutable.Map({
-  message: '',
-  content: null,
+  extraction: null,
+  saved: false,
+  tab: null,
 });
 
 const actionsMap = {
-  [ActionTypes.SAY_HELLO](state, action) {
-    return state.set('message', action.message);
+  [ActionTypes.SAVE_PAGE](state, action) {
+    return state.set('saved', action.saved);
   },
-  [ActionTypes.SET_CONTENT](state, action) {
-    return state.set('content', action.content);
+  [ActionTypes.SET_EXTRACTION](state, action) {
+    return state.set('extraction', Immutable.fromJS(action.extraction));
+  },
+  [ActionTypes.SET_TAB](state, action) {
+    return state.set('tab', Immutable.fromJS(action.tab));
   }
 };
 
