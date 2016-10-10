@@ -20,12 +20,14 @@ function* handleExtractionSaga() {
   // TODO put it in a dedicated file
   const extraction = yield select(state => state.current.get('extraction').toJS());
   console.log(extraction);
-  const url = yield select(state => state.current.get('tab').get('url'));
-  console.log(url);
   // TODO filter in a transformer
   const doc = _.merge(
-    _.pick(extraction, ['title', 'author', 'description', 'text', 'publisher']),
-    { url, id: hashCode(url) }
+    _.pick(extraction, ['title', 'author', 'description', 'text',
+      'publisher', 'extraction.canonicalLink']),
+    {
+      url: extraction.canonicalLink,
+      id: hashCode(extraction.canonicalLink),
+    }
   );
   doc.authors = doc.author.join(' ');
   console.log('doc', doc);
