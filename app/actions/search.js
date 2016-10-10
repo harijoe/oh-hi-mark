@@ -15,3 +15,15 @@ export function resetPopup() {
 export function setSelected(selected) {
   return { type: types.SET_SELECTED, selected };
 }
+
+export function incrementSelected() {
+  return { type: types.INCREMENT_SELECTED };
+}
+
+export function decrementSelected() {
+  return { type: types.DECREMENT_SELECTED };
+}
+
+export function redirectToSelected() {
+  return { type: types.REDIRECT_TO_SELECTED };
+}

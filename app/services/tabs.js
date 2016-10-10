@@ -8,6 +8,6 @@ import _ from 'lodash';
 export default (dispatch) => chrome.tabs.onActivated.addListener(({ tabId }) => {
   chrome.tabs.get(tabId, (tabInfo) => {
     // TODO Filter result
-    dispatch(CurrentActions.setTab(_.pick(tabInfo, ['url', 'title', 'status'])));
+    dispatch(CurrentActions.setTab(_.pick(tabInfo, ['url', 'title', 'status', 'id'])));
   });
 });

@@ -8,6 +8,6 @@ export default connect(
     results: state.search.results,
     selectedId: selectedIdSelector(state),
   }),
-  dispatch => ({ actions: bindActionCreators(Object.assign({}
+  dispatch => ({ actions: bindActionCreators(Object.assign({},
   ), dispatch) })
 )(Results);
