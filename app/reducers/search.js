@@ -16,6 +16,9 @@ const actionsMap = {
   [ActionTypes.RESET_POPUP](state) {
     return state.set('query', initialState.get('query'));
   },
+  [ActionTypes.SET_SELECTED](state, action) {
+    return state.set('selected', action.selected);
+  },
 };
 
 export default {

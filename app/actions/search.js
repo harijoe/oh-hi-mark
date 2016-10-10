@@ -11,3 +11,7 @@ export function setResults(results) {
 export function resetPopup() {
   return { type: types.RESET_POPUP };
 }
+
+export function setSelected(selected) {
+  return { type: types.SET_SELECTED, selected };
+}

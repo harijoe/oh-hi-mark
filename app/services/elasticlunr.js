@@ -41,7 +41,10 @@ export const addDoc = (doc) => {
 // Check if rawResults is array
 export const hydrate = (rawResults) => {
   console.log(rawResults);
-  return rawResults.map(raw => _.pick(index.documentStore.getDoc(raw.ref), getFields));
+  return rawResults.map(raw => Object.assign({},
+    _.pick(index.documentStore.getDoc(raw.ref), getFields),
+    { id: raw.ref },
+  ));
 };
 
 export const search = query => index.search(query,

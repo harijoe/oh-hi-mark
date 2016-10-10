@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react';
 
 function Results(props) {
+  console.log(props.selectedId);
   return (
     <ul>
       {props.results.map((result) => {
         return (
-          <li>
+          <li key={result.id}>
             <a href={result.url}>
-              {result.title}
+              {result.title} {result.id === props.selectedId && '- selected'}
             </a>
           </li>
         );
@@ -18,6 +19,7 @@ function Results(props) {
 
 Results.propTypes = {
   results: PropTypes.array,
+  selectedId: PropTypes.string,
 };
 
 export default Results;

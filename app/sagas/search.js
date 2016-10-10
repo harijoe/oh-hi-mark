@@ -1,7 +1,7 @@
 import { takeLatest } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import * as ActionTypes from '../constants/ActionTypes';
-import { setResults } from '../actions/search';
+import { setResults, setSelected } from '../actions/search';
 import { search, hydrate } from '../../app/services/elasticlunr';
 
 function* getResultsSaga(action) {
@@ -10,6 +10,7 @@ function* getResultsSaga(action) {
   const results = hydrate(rawResults);
   console.log(results);
   yield put(setResults(results));
+  yield put(setSelected(0));
 }
 
 export default function* () {
