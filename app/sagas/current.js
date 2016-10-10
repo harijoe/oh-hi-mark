@@ -12,6 +12,7 @@ function* savePageSaga() {
   yield put(setSaved(true));
 }
 
+// TODO BUG handle Tab change to update logo
 function* handleLogoSaga(action) {
   yield call(setLogo, action.saved);
 }

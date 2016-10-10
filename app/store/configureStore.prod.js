@@ -1,14 +1,15 @@
 import { applyMiddleware, createStore, compose } from 'redux';
 import rootReducer from '../reducers';
-import thunk from 'redux-thunk';
-import storage from '../utils/storage';
+import createSagaMiddleware from 'redux-saga';
+import sagas from '../sagas';
 
-const middlewares = applyMiddleware(thunk);
+const sagaMiddleware = createSagaMiddleware();
 const enhancer = compose(
-  middlewares,
-  storage()
+  applyMiddleware(sagaMiddleware),
 );
 
 export default function (initialState) {
-  return createStore(rootReducer, initialState, enhancer);
+  const store = createStore(rootReducer, initialState, enhancer);
+  sagas.map(sagaMiddleware.run);
+  return store;
 }
