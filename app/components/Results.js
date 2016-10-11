@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 
 function Results(props) {
-  console.log(props.selectedId);
   return (
     <ul>
       {props.results.map((result) => {

@@ -27,12 +27,9 @@ export const initIndex = () => {
 };
 
 export const loadIndex = (serializedIndex) => {
-  console.log('serializedIndex', serializedIndex);
-  console.log('index', index);
   if (serializedIndex !== null) {
     index = elasticlunr.Index.load(serializedIndex);
   }
-  console.log('index', index);
 };
 
 export const serialize = () => index.toJSON();
@@ -40,7 +37,6 @@ export const serialize = () => index.toJSON();
 export const addDoc = (doc) => {
   index.addDoc(doc);
 
-  console.log(serialize());
 };
 
 export const persistIndex = () => {
@@ -49,7 +45,6 @@ export const persistIndex = () => {
 
 // Check if rawResults is array
 export const hydrate = (rawResults) => {
-  console.log(rawResults);
   return rawResults.map(raw => Object.assign({},
     _.pick(index.documentStore.getDoc(raw.ref), getFields),
     { id: raw.ref },

@@ -19,12 +19,16 @@
     "toggle-feature-save": {
       "suggested_key": {
         "default": "Ctrl+Shift+K",
-        "mac": "Command+Shift+K"
+        "mac": "Command+Shift+K",
+        "windows": "Ctrl+Shift+K",
+        "chromeos": "Ctrl+Shift+K",
+        "linux": "Ctrl+Shift+K"
       },
       "description": "Saves the page"
     },
     "_execute_browser_action": {
       "suggested_key": {
+        "default": "Ctrl+Shift+K",
         "windows": "Ctrl+Shift+Y",
         "mac": "Command+Shift+U",
         "chromeos": "Ctrl+Shift+U",

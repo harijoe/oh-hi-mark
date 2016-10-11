@@ -20,22 +20,21 @@ function* handleLogoSaga(action) {
 function* handleExtractionSaga() {
   // TODO put it in a dedicated file
   const extraction = yield select(state => state.current.get('extraction').toJS());
-  console.log(extraction);
+
   // TODO filter in a transformer
+  // TODO BUG store url in extraction from inject
   const doc = _.merge(
     _.pick(extraction, ['title', 'author', 'description', 'text',
-      'publisher', 'extraction.canonicalLink']),
+      'publisher', 'canonicalLink']),
     {
       url: extraction.canonicalLink,
       id: hashCode(extraction.canonicalLink),
     }
   );
   doc.authors = doc.author.join(' ');
-  console.log('doc', doc);
 
   yield call(addDoc, doc);
   yield call(persistIndex);
-  console.log('SAVING');
 }
 
 export default function* () {
