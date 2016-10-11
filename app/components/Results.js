@@ -1,11 +1,6 @@
 import React, { PropTypes } from 'react';
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import ContentInbox from 'material-ui/svg-icons/content/inbox';
-import ActionGrade from 'material-ui/svg-icons/action/grade';
-import ContentSend from 'material-ui/svg-icons/content/send';
-import ContentDrafts from 'material-ui/svg-icons/content/drafts';
-import Divider from 'material-ui/Divider';
-import ActionInfo from 'material-ui/svg-icons/action/info';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import { StyleSheet, css } from 'aphrodite';
 
 function Results(props) {
   if (props.query === '') {
@@ -13,8 +8,16 @@ function Results(props) {
   }
 
   if (props.results.length === 0) {
-    return <p>No result</p>;
+    return <p className={css(styles.noResult)}>No result</p>;
   }
+
+  const onRowOver = (id) => () => {
+    props.actions.setSelected(id);
+  };
+
+  const onClick = () => {
+    props.actions.redirectToSelected();
+  };
 
   return (
     <Table>
@@ -24,12 +27,17 @@ function Results(props) {
         </TableRow>
       </TableHeader>
       <TableBody displayRowCheckbox={false} deselectOnClickaway={false}>
-        {props.results.map((result) => (
-          <TableRow key={result.id} selected={result.id === props.selectedId}>
+        {props.results.map((result, index) => (
+          <TableRow
+            key={result.id}
+            selected={result.id === props.selectedId}
+            onMouseMove={onRowOver(index)}
+            onClick={onClick}
+            selectable={false}
+            className={css(styles.tableRow)}
+          >
             <TableRowColumn>
-              <a href={result.url}>
-                {result.title}
-              </a>
+              {result.title}
             </TableRowColumn>
           </TableRow>
         ))}
@@ -38,10 +46,21 @@ function Results(props) {
   );
 }
 
+const styles = StyleSheet.create({
+  tableRow: {
+    cursor: 'pointer',
+  },
+  noResult: {
+    textAlign: 'center',
+    color: 'grey',
+  }
+});
+
 Results.propTypes = {
   results: PropTypes.array,
   query: PropTypes.string,
   selectedId: PropTypes.string,
+  actions: PropTypes.obj,
 };
 
 export default Results;

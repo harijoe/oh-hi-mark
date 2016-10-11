@@ -1,10 +1,11 @@
-export const SAY_HELLO = 'SAY_HELLO';
+export const INIT_APP = 'INIT_APP';
 
 // Current
 export const SAVE_PAGE = 'SAVE_PAGE';
 export const SET_TAB = 'SET_TAB';
 export const SET_SAVED = 'SET_SAVED';
 export const SET_EXTRACTION = 'SET_EXTRACTION';
+export const SET_STORE_INFO = 'SET_STORE_INFO';
 
 // Search
 export const SET_QUERY = 'SET_QUERY';

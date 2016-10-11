@@ -64,3 +64,8 @@ export const hydrate = (rawResults) => rawResults.map(raw => Object.assign({},
 export const search = query => index.search(query,
   searchConfig
 ).slice(0, MAX_RESULTS);
+
+// Add store info here like version etc
+export const info = () => ({
+  length: index.documentStore.length,
+});

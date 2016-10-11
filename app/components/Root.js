@@ -5,6 +5,7 @@ import style from './Root.css';
 
 function Root() {
   return (
+    // TODO DO PROPER RESET HERE
     <div className={style.body}>
       <SearchInputContainer />
       <ResultsContainer />

@@ -2,9 +2,14 @@ import React, { PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 
 function SearchInput(props) {
+  if (props.storeLength === 0) {
+    // TODO Add helper
+    return <p>Store documents first!</p>;
+  }
+
   return (
     <TextField
-      hintText="Search a saved document"
+      hintText={`Search through ${props.storeLength} documents`}
       hintStyle={{ marginLeft: 10 }}
       autoFocus
       fullWidth
@@ -16,6 +21,7 @@ function SearchInput(props) {
 
 SearchInput.propTypes = {
   query: PropTypes.string,
+  storeLength: PropTypes.numeric,
   actions: PropTypes.shape({
     typeQuery: PropTypes.func,
   }),

@@ -1,10 +1,10 @@
 import { takeEvery } from 'redux-saga';
 import { call, put, select } from 'redux-saga/effects';
 import * as ActionTypes from '../constants/ActionTypes';
-import { setSaved, setTab } from '../actions/current';
+import { setSaved, setTab, setStoreInfo } from '../actions/current';
 import { setIcon } from '../services/icon';
 import inject from '../services/inject';
-import { addDoc, persistIndex, hasDoc } from '../services/elasticlunr';
+import { addDoc, persistIndex, hasDoc, info } from '../services/elasticlunr';
 import { IcurrentTabSelector, IextractionSelector } from '../selectors/current';
 
 function* savePageSaga() {
@@ -30,11 +30,17 @@ function* handleExtractionSaga() {
   yield* refreshSavedSaga(setTab(tab.toJS()));
 }
 
+function* setStoreInfoSaga() {
+  const storeInfo = yield call(info);
+  yield put(setStoreInfo(storeInfo));
+}
+
 export default function* () {
   yield [
     takeEvery(ActionTypes.SAVE_PAGE, savePageSaga),
     takeEvery(ActionTypes.SET_EXTRACTION, handleExtractionSaga),
     takeEvery(ActionTypes.SET_SAVED, handleIconSaga),
     takeEvery(ActionTypes.SET_TAB, refreshSavedSaga),
+    takeEvery(ActionTypes.INIT_APP, setStoreInfoSaga),
   ];
 }

@@ -5,6 +5,7 @@ const initialState = new Immutable.Map({
   extraction: null,
   saved: false,
   tab: null,
+  storeInfo: new Immutable.Map(),
 });
 
 const actionsMap = {
@@ -16,6 +17,9 @@ const actionsMap = {
   },
   [ActionTypes.SET_TAB](state, action) {
     return state.set('tab', Immutable.fromJS(action.tab));
+  },
+  [ActionTypes.SET_STORE_INFO](state, action) {
+    return state.set('storeInfo', action.info);
   }
 };
 

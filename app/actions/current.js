@@ -15,3 +15,11 @@ export function setSaved(saved) {
 export function setExtraction(extraction) {
   return { type: types.SET_EXTRACTION, extraction };
 }
+
+export function setStoreInfo(info) {
+  return { type: types.SET_STORE_INFO, info };
+}
+
+export function initApp() {
+  return { type: types.INIT_APP };
+}

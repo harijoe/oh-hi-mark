@@ -6,6 +6,7 @@ import * as SearchActions from '../actions/search';
 export default connect(
   state => Object.assign({}, {
     query: state.search.query,
+    storeLength: state.current.storeInfo.length,
   }),
   dispatch => ({ actions: bindActionCreators(Object.assign({},
     SearchActions,
