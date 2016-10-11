@@ -1,46 +1,40 @@
-import { takeLatest } from 'redux-saga';
+import { takeEvery } from 'redux-saga';
 import { call, put, select } from 'redux-saga/effects';
 import * as ActionTypes from '../constants/ActionTypes';
-import { setSaved } from '../actions/current';
+import { setSaved, setTab } from '../actions/current';
 import { setLogo } from '../services/logo';
 import inject from '../services/inject';
-import { addDoc, persistIndex } from '../services/elasticlunr';
-import { hashCode } from '../services/util';
+import { addDoc, persistIndex, hasDoc } from '../services/elasticlunr';
+import { IcurrentTabSelector, IextractionSelector } from '../selectors/current';
 
 function* savePageSaga() {
   yield call(inject);
   yield put(setSaved(true));
 }
 
-// TODO BUG handle Tab change to update logo
 function* handleLogoSaga(action) {
   yield call(setLogo, action.saved);
 }
 
+function* refreshSavedSaga(action) {
+  const saved = yield call(hasDoc, action.tab.url);
+  yield put(setSaved(saved));
+}
+
 function* handleExtractionSaga() {
-  // TODO put it in a dedicated file
-  const extraction = yield select(state => state.current.get('extraction').toJS());
-
-  // TODO filter in a transformer
-  // TODO BUG store url in extraction from inject
-  const doc = _.merge(
-    _.pick(extraction, ['title', 'author', 'description', 'text',
-      'publisher', 'canonicalLink']),
-    {
-      url: extraction.canonicalLink,
-      id: hashCode(extraction.canonicalLink),
-    }
-  );
-  doc.authors = doc.author.join(' ');
-
-  yield call(addDoc, doc);
+  const extraction = yield select(IextractionSelector);
+  yield call(addDoc, extraction.toJS());
   yield call(persistIndex);
+
+  const tab = yield select(IcurrentTabSelector);
+  yield* refreshSavedSaga(setTab(tab.toJS()));
 }
 
 export default function* () {
   yield [
-    takeLatest(ActionTypes.SAVE_PAGE, savePageSaga),
-    takeLatest(ActionTypes.SET_EXTRACTION, handleExtractionSaga),
-    takeLatest(ActionTypes.SET_SAVED, handleLogoSaga),
+    takeEvery(ActionTypes.SAVE_PAGE, savePageSaga),
+    takeEvery(ActionTypes.SET_EXTRACTION, handleExtractionSaga),
+    takeEvery(ActionTypes.SET_SAVED, handleLogoSaga),
+    takeEvery(ActionTypes.SET_TAB, refreshSavedSaga),
   ];
 }

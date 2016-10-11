@@ -21,8 +21,8 @@ function* redirectToSelectedSaga() {
   const selectedResult = results.get(selected);
 
 
+  // Redirects to selected result
   if (selectedResult != null) {
-    // TODO ISOLATE
     chrome.tabs.update(currentTabId, { url: selectedResult.get('url') });
   }
 }

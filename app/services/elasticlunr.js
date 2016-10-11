@@ -1,13 +1,15 @@
 import elasticlunr from 'elasticlunr';
 import { INDEX_KEY } from '../constants/Storage';
+import { hashCode, cleanUrl } from '../services/util';
 import _ from 'lodash';
-elasticlunr.clearStopWords();
+
+// TODO Add versioning to fields
 
 let index;
 const fields = ['title', 'authors', 'description', 'text', 'url', 'publisher'];
 const getFields = ['title', 'url'];
 const searchConfig = {
-  bool: 'OR',
+  bool: 'AND',
   expand: true,
   fields: {
     title: { boost: 10 },
@@ -19,8 +21,11 @@ const searchConfig = {
   }
 };
 
-// TODO Add versioning to fields
 export const initIndex = () => {
+  if (index !== undefined) {
+    return;
+  }
+  elasticlunr.clearStopWords();
   index = elasticlunr((config) => {
     fields.map(field => config.addField(field));
   });
@@ -35,21 +40,25 @@ export const loadIndex = (serializedIndex) => {
 export const serialize = () => index.toJSON();
 
 export const addDoc = (doc) => {
-  index.addDoc(doc);
+  const identifiedDoc = Object.assign({}, doc, {
+    id: hashCode(cleanUrl(doc.url)),
+  });
+  index.addDoc(identifiedDoc);
+};
 
+export const hasDoc = (url) => {
+  const id = hashCode(cleanUrl(url));
+  return index.documentStore.hasDoc(id);
 };
 
 export const persistIndex = () => {
-  chrome.storage.local.set({ INDEX_KEY: serialize() });
+  chrome.storage.local.set({ [INDEX_KEY]: serialize() });
 };
 
-// Check if rawResults is array
-export const hydrate = (rawResults) => {
-  return rawResults.map(raw => Object.assign({},
-    _.pick(index.documentStore.getDoc(raw.ref), getFields),
-    { id: raw.ref },
-  ));
-};
+export const hydrate = (rawResults) => rawResults.map(raw => Object.assign({},
+  _.pick(index.documentStore.getDoc(raw.ref), getFields),
+  { id: raw.ref },
+));
 
 export const search = query => index.search(query,
   searchConfig

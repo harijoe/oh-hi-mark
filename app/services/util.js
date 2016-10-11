@@ -11,3 +11,10 @@ export const hashCode = (input) => {
   }
   return hash;
 };
+
+export const cleanUrl = (url) => {
+  let result = '';
+  result = url.split('?')[0].split('#')[0];
+  result = result.split('://');
+  return result.length > 0 ? result[1] : result[0];
+};
