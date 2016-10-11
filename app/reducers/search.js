@@ -17,6 +17,7 @@ const actionsMap = {
   [ActionTypes.RESET_POPUP](state) {
     return state.merge({
       query: initialState.get('query'),
+      results: initialState.get('results'),
       selected: 0,
     });
   },

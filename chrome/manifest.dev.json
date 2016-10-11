@@ -28,11 +28,11 @@
     },
     "_execute_browser_action": {
       "suggested_key": {
-        "default": "Ctrl+Shift+K",
-        "windows": "Ctrl+Shift+Y",
+        "default": "Ctrl+Shift+U",
+        "windows": "Ctrl+Shift+U",
         "mac": "Command+Shift+U",
         "chromeos": "Ctrl+Shift+U",
-        "linux": "Ctrl+Shift+J"
+        "linux": "Ctrl+Shift+U"
       }
     }
   },

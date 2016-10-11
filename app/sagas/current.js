@@ -28,6 +28,7 @@ function* handleExtractionSaga() {
 
   const tab = yield select(IcurrentTabSelector);
   yield* refreshSavedSaga(setTab(tab.toJS()));
+  yield* setStoreInfoSaga();
 }
 
 function* setStoreInfoSaga() {

@@ -21,7 +21,7 @@ function SearchInput(props) {
 
 SearchInput.propTypes = {
   query: PropTypes.string,
-  storeLength: PropTypes.numeric,
+  storeLength: PropTypes.number,
   actions: PropTypes.shape({
     typeQuery: PropTypes.func,
   }),

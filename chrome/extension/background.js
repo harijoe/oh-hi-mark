@@ -4,6 +4,7 @@ import runShortcutListeners from '../../app/services/shortcuts';
 import { initIndex, loadIndex } from '../../app/services/elasticlunr';
 import { INDEX_KEY } from '../../app/constants/Storage';
 import { initApp } from '../../app/actions/current';
+import { resetPopup } from '../../app/actions/search';
 
 const createStore = require('../../app/store/configureStore');
 const initialState = {};
@@ -21,3 +22,13 @@ chrome.storage.local.get(INDEX_KEY, index => {
   }
   store.dispatch(initApp());
 });
+
+const connect = chrome.runtime.connect();
+console.log(connect);
+connect.onDisconnect.addListener(() => {
+  console.log('OUT BACK');
+  store.dispatch(resetPopup());
+});
+
+// Try to add a listener to the store to this if it's immutable data
+// Suspect redux saga
