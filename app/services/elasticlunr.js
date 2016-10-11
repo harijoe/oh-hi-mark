@@ -20,6 +20,7 @@ const searchConfig = {
     url: { boost: 0 },
   }
 };
+const MAX_RESULTS = 5;
 
 export const initIndex = () => {
   if (index !== undefined) {
@@ -62,4 +63,4 @@ export const hydrate = (rawResults) => rawResults.map(raw => Object.assign({},
 
 export const search = query => index.search(query,
   searchConfig
-);
+).slice(0, MAX_RESULTS);

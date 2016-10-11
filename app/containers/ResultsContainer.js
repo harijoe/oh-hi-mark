@@ -5,6 +5,7 @@ import { selectedIdSelector } from '../selectors/search';
 
 export default connect(
   state => Object.assign({}, {
+    query: state.search.query,
     results: state.search.results,
     selectedId: selectedIdSelector(state),
   }),

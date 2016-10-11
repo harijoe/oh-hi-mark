@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import runKeypressListeners from '../../app/services/keypress';
 import { Provider } from 'react-redux';
 import { Store } from 'react-chrome-redux';
@@ -17,7 +18,9 @@ const unsubscribe = store.subscribe(() => {
   unsubscribe(); // make sure to only fire once
   ReactDOM.render(
     <Provider store={store}>
-      <Root />
+      <MuiThemeProvider>
+        <Root />
+      </MuiThemeProvider>
     </Provider>,
     document.querySelector('#root')
   );

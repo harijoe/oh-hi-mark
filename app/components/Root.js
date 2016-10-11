@@ -1,10 +1,11 @@
 import React from 'react';
 import SearchInputContainer from '../containers/SearchInputContainer';
 import ResultsContainer from '../containers/ResultsContainer';
+import style from './Root.css';
 
 function Root() {
   return (
-    <div>
+    <div className={style.body}>
       <SearchInputContainer />
       <ResultsContainer />
     </div>
