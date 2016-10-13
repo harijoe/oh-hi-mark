@@ -6,8 +6,8 @@ import _ from 'lodash';
 // TODO Add versioning to fields
 
 let index;
-const fields = ['title', 'authors', 'description', 'text', 'url', 'publisher'];
-const getFields = ['title', 'url', 'favicon'];
+const fields = ['title', 'authors', 'description', 'text', 'url', 'publisher', 'date'];
+const getFields = ['title', 'url', 'favicon', 'date'];
 const searchConfig = {
   bool: 'AND',
   expand: true,

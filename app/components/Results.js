@@ -53,7 +53,7 @@ function Results(props) {
               {cleanUrl(result.url).split('/')[0]}
             </TableRowColumn>
             <TableRowColumn style={{ width: '23%' }}>
-              {moment(result.date).fromNow()}
+              {result.date != null && moment(result.date).fromNow()}
             </TableRowColumn>
           </TableRow>
         ))}
@@ -69,6 +69,8 @@ const styles = StyleSheet.create({
   noResult: {
     textAlign: 'center',
     color: 'grey',
+    height: 60,
+    lineHeight: '60px',
   }
 });
 

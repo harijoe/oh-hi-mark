@@ -11,14 +11,18 @@ function SearchInput(props) {
   }
 
   return (
-    <TextField
-      hintText={`Search through ${props.storeLength} documents`}
-      hintStyle={{ marginLeft: 10 }}
-      autoFocus
-      fullWidth
-      onChange={e => props.actions.setQuery(e.target.value)}
-      value={props.query}
-    />
+    <div>
+      <TextField
+        hintText={`Search through ${props.storeLength} documents`}
+        hintStyle={{ marginLeft: 10 }}
+        inputStyle={{ marginLeft: 10 }}
+        className={css(styles.textField)}
+        autoFocus
+        fullWidth
+        onChange={e => props.actions.setQuery(e.target.value)}
+      />
+      <img className={css(styles.inapp)} alt="Oh, hi mark!" src="img/inapp.png" />
+    </div>
   );
 }
 
@@ -27,6 +31,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'grey',
   },
+  inapp: {
+    height: 45,
+    verticalAlign: 'middle',
+    marginLeft: '4%',
+  },
+  textField: {
+    width: '68%',
+  }
 });
 
 SearchInput.propTypes = {
