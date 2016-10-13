@@ -13,10 +13,7 @@ const pathDefault = {
 export const setIcon = (saved = false) => {
   const path = saved ? pathSaved : pathDefault;
 
-  return chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
-    chrome.browserAction.setIcon({
-      path,
-      tabId: tabs[0].id
-    });
+  return chrome.browserAction.setIcon({
+    path
   });
 };
