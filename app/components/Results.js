@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import { StyleSheet, css } from 'aphrodite';
 import { cleanUrl } from '../services/util';
+import moment from 'moment';
 
 function Results(props) {
   if (props.query === '') {
@@ -26,9 +27,10 @@ function Results(props) {
     <Table>
       <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
         <TableRow>
-          <TableHeaderColumn style={{width: '10%'}}>Logo</TableHeaderColumn>
-          <TableHeaderColumn style={{width: '50%'}}>Title</TableHeaderColumn>
-          <TableHeaderColumn style={{width: '40%'}}>Url</TableHeaderColumn>
+          <TableHeaderColumn style={{ width: '7%' }}>Logo</TableHeaderColumn>
+          <TableHeaderColumn style={{ width: '45%' }}>Title</TableHeaderColumn>
+          <TableHeaderColumn style={{ width: '25%' }}>Url</TableHeaderColumn>
+          <TableHeaderColumn style={{ width: '23%' }}>Added</TableHeaderColumn>
         </TableRow>
       </TableHeader>
       <TableBody displayRowCheckbox={false} deselectOnClickaway={false}>
@@ -41,14 +43,17 @@ function Results(props) {
             selectable={false}
             className={css(styles.tableRow)}
           >
-            <TableRowColumn style={{width: '10%'}}>
+            <TableRowColumn style={{ width: '7%' }}>
               <img alt={result.title} src={result.favicon} />
             </TableRowColumn>
-            <TableRowColumn style={{width: '50%'}}>
+            <TableRowColumn style={{ width: '45%' }}>
               {result.title}
             </TableRowColumn>
-            <TableRowColumn style={{width: '40%'}}>
+            <TableRowColumn style={{ width: '25%' }}>
               {cleanUrl(result.url).split('/')[0]}
+            </TableRowColumn>
+            <TableRowColumn style={{ width: '23%' }}>
+              {moment(result.date).fromNow()}
             </TableRowColumn>
           </TableRow>
         ))}
