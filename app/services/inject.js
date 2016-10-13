@@ -10,6 +10,7 @@ export const injectExtraction = () => {
 };
 
 export const injectToastr = () => {
+  // TODO Graphic bug on some website (9gag), try to find out why
   injectResources([
     'vendor/toastr.min.css',
     'vendor/toastr.min.js'

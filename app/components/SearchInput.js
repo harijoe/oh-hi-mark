@@ -1,10 +1,13 @@
 import React, { PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
+import { StyleSheet, css } from 'aphrodite';
 
 function SearchInput(props) {
   if (props.storeLength === 0) {
-    // TODO Add helper
-    return <p>Store documents first!</p>;
+    return (<div className={css(styles.noDocs)}>
+      <p>Your have saved no document yet</p>
+      <p>Press Ctrl+Shift+S on a webpage to save it</p>
+    </div>);
   }
 
   return (
@@ -18,6 +21,13 @@ function SearchInput(props) {
     />
   );
 }
+
+const styles = StyleSheet.create({
+  noDocs: {
+    textAlign: 'center',
+    color: 'grey',
+  },
+});
 
 SearchInput.propTypes = {
   query: PropTypes.string,

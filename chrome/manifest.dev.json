@@ -1,16 +1,14 @@
 {
-  "version": "0.0.2",
-  "name": "taggl",
+  "version": "0.0.3",
+  "name": "OhHiMark!",
   "manifest_version": 2,
-  "description": "Example for react-chrome-extension-boilerplate",
+  "description": "Minimalist chrome extension designed to enrich chrome's bookmark with a search functionality and a perfect user experience",
   "browser_action": {
-    "default_title": "React Chrome Extension Example",
+    "default_title": "OhHiMark!",
     "default_popup": "popup.html"
   },
   "icons": {
-    "16": "img/icon/icon-16.png",
-    "48": "img/icon/icon-48.png",
-    "128": "img/icon/icon-128.png"
+    "128": "img/icon/icon-saved-128.png"
   },
   "background": {
     "page": "background.html"
@@ -18,21 +16,21 @@
   "commands": {
     "toggle-feature-save": {
       "suggested_key": {
-        "default": "Ctrl+Shift+K",
-        "mac": "Command+Shift+K",
-        "windows": "Ctrl+Shift+K",
-        "chromeos": "Ctrl+Shift+K",
-        "linux": "Ctrl+Shift+K"
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S",
+        "windows": "Ctrl+Shift+S",
+        "chromeos": "Ctrl+Shift+S",
+        "linux": "Ctrl+Shift+S"
       },
-      "description": "Saves the page"
+      "description": "Saves the current page"
     },
     "_execute_browser_action": {
       "suggested_key": {
-        "default": "Ctrl+Shift+U",
-        "windows": "Ctrl+Shift+U",
-        "mac": "Command+Shift+U",
-        "chromeos": "Ctrl+Shift+U",
-        "linux": "Ctrl+Shift+U"
+        "default": "Ctrl+Shift+O",
+        "windows": "Ctrl+Shift+O",
+        "mac": "Command+Shift+O",
+        "chromeos": "Ctrl+Shift+O",
+        "linux": "Ctrl+Shift+O"
       }
     }
   },

@@ -1,5 +1,5 @@
 import elasticlunr from 'elasticlunr';
-import { INDEX_KEY } from '../constants/Storage';
+import { getIndexKey } from '../services/storage';
 import { hashCode, cleanUrl } from '../services/util';
 import _ from 'lodash';
 
@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 let index;
 const fields = ['title', 'authors', 'description', 'text', 'url', 'publisher'];
-const getFields = ['title', 'url'];
+const getFields = ['title', 'url', 'favicon'];
 const searchConfig = {
   bool: 'AND',
   expand: true,
@@ -20,7 +20,7 @@ const searchConfig = {
     url: { boost: 0 },
   }
 };
-const MAX_RESULTS = 5;
+const MAX_RESULTS = 6;
 
 export const initIndex = () => {
   if (index !== undefined) {
@@ -53,7 +53,7 @@ export const hasDoc = (url) => {
 };
 
 export const persistIndex = () => {
-  chrome.storage.local.set({ [INDEX_KEY]: serialize() });
+  chrome.storage.local.set({ [getIndexKey()]: serialize() });
 };
 
 export const hydrate = (rawResults) => rawResults.map(raw => Object.assign({},

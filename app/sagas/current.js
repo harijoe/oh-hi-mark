@@ -5,9 +5,13 @@ import { setSaved, setTab, setStoreInfo } from '../actions/current';
 import { setIcon } from '../services/icon';
 import { injectExtraction, injectToastr } from '../services/inject';
 import { addDoc, persistIndex, hasDoc, info } from '../services/elasticlunr';
-import { IcurrentTabSelector, IextractionSelector } from '../selectors/current';
+import { IcurrentTabSelector, IextractionSelector, IsavedSelector } from '../selectors/current';
 
 function* savePageSaga() {
+  const saved = yield select(IsavedSelector);
+  if (saved) {
+    return;
+  }
   yield call(() => {
     injectToastr();
     injectExtraction();

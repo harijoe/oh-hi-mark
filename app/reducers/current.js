@@ -9,7 +9,7 @@ const initialState = new Immutable.Map({
 });
 
 const actionsMap = {
-  [ActionTypes.SAVE_PAGE](state, action) {
+  [ActionTypes.SET_SAVED](state, action) {
     return state.set('saved', action.saved);
   },
   [ActionTypes.SET_EXTRACTION](state, action) {

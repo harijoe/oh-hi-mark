@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import { StyleSheet, css } from 'aphrodite';
+import { cleanUrl } from '../services/util';
 
 function Results(props) {
   if (props.query === '') {
@@ -12,7 +13,9 @@ function Results(props) {
   }
 
   const onRowOver = (id) => () => {
-    props.actions.setSelected(id);
+    if (props.selected !== id) {
+      props.actions.setSelected(id);
+    }
   };
 
   const onClick = () => {
@@ -21,9 +24,11 @@ function Results(props) {
 
   return (
     <Table>
-      <TableHeader displaySelectAll={false}>
+      <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
         <TableRow>
-          <TableHeaderColumn>Title</TableHeaderColumn>
+          <TableHeaderColumn style={{width: '10%'}}>Logo</TableHeaderColumn>
+          <TableHeaderColumn style={{width: '50%'}}>Title</TableHeaderColumn>
+          <TableHeaderColumn style={{width: '40%'}}>Url</TableHeaderColumn>
         </TableRow>
       </TableHeader>
       <TableBody displayRowCheckbox={false} deselectOnClickaway={false}>
@@ -36,8 +41,14 @@ function Results(props) {
             selectable={false}
             className={css(styles.tableRow)}
           >
-            <TableRowColumn>
+            <TableRowColumn style={{width: '10%'}}>
+              <img alt={result.title} src={result.favicon} />
+            </TableRowColumn>
+            <TableRowColumn style={{width: '50%'}}>
               {result.title}
+            </TableRowColumn>
+            <TableRowColumn style={{width: '40%'}}>
+              {cleanUrl(result.url).split('/')[0]}
             </TableRowColumn>
           </TableRow>
         ))}
@@ -59,8 +70,9 @@ const styles = StyleSheet.create({
 Results.propTypes = {
   results: PropTypes.array,
   query: PropTypes.string,
+  selected: PropTypes.string,
   selectedId: PropTypes.string,
-  actions: PropTypes.obj,
+  actions: PropTypes.object,
 };
 
 export default Results;

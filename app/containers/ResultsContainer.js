@@ -8,6 +8,7 @@ export default connect(
   state => Object.assign({}, {
     query: state.search.query,
     results: state.search.results,
+    selected: state.search.selected,
     selectedId: selectedIdSelector(state),
   }),
   dispatch => ({ actions: bindActionCreators(Object.assign({},
