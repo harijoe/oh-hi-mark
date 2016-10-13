@@ -3,14 +3,13 @@ const webpack = require('webpack');
 
 const host = 'localhost';
 const port = 3000;
-const customPath = path.join(__dirname, './customPublicPath');
 const hotScript = 'webpack-hot-middleware/client?path=__webpack_hmr&dynamicPublicPath=true';
 
 const baseDevConfig = () => ({
   devtool: 'eval-cheap-module-source-map',
   entry: {
-    popup: [customPath, hotScript, path.join(__dirname, '../chrome/extension/popup')],
-    background: [customPath, hotScript, path.join(__dirname, '../chrome/extension/background')],
+    popup: [hotScript, path.join(__dirname, '../chrome/extension/popup')],
+    background: [hotScript, path.join(__dirname, '../chrome/extension/background')],
   },
   devMiddleware: {
     publicPath: `http://${host}:${port}/js`,
@@ -69,16 +68,16 @@ const baseDevConfig = () => ({
 });
 
 const injectPageConfig = baseDevConfig();
-injectPageConfig.entry = [
-  customPath,
-  path.join(__dirname, '../chrome/extension/inject')
-];
+injectPageConfig.entry = {
+  'inject-extraction': path.join(__dirname, '../chrome/extension/inject-extraction'),
+  'inject-toastr': path.join(__dirname, '../chrome/extension/inject-toastr'),
+};
 delete injectPageConfig.hotMiddleware;
 delete injectPageConfig.module.loaders[0].query;
 injectPageConfig.plugins.shift(); // remove HotModuleReplacementPlugin
 injectPageConfig.output = {
   path: path.join(__dirname, '../dev/js'),
-  filename: 'inject.bundle.js',
+  filename: '[name].bundle.js',
 };
 const appConfig = baseDevConfig();
 

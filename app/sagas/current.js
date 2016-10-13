@@ -3,12 +3,15 @@ import { call, put, select } from 'redux-saga/effects';
 import * as ActionTypes from '../constants/ActionTypes';
 import { setSaved, setTab, setStoreInfo } from '../actions/current';
 import { setIcon } from '../services/icon';
-import inject from '../services/inject';
+import { injectExtraction, injectToastr } from '../services/inject';
 import { addDoc, persistIndex, hasDoc, info } from '../services/elasticlunr';
 import { IcurrentTabSelector, IextractionSelector } from '../selectors/current';
 
 function* savePageSaga() {
-  yield call(inject);
+  yield call(() => {
+    injectToastr();
+    injectExtraction();
+  });
   yield put(setSaved(true));
 }
 

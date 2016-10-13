@@ -1,12 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
-const customPath = path.join(__dirname, './customPublicPath');
 
 module.exports = {
   entry: {
-    background: [customPath, path.join(__dirname, '../chrome/extension/background')],
-    inject: [customPath, path.join(__dirname, '../chrome/extension/inject')],
-    popup: [customPath, path.join(__dirname, '../chrome/extension/popup')],
+    background: [path.join(__dirname, '../chrome/extension/background')],
+    popup: [path.join(__dirname, '../chrome/extension/popup')],
+    'inject-extraction': [path.join(__dirname, '../chrome/extension/inject-extraction')],
+    'inject-toastr': [path.join(__dirname, '../chrome/extension/inject-toastr')],
   },
   output: {
     path: path.join(__dirname, '../build/js'),
