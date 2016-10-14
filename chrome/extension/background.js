@@ -2,7 +2,7 @@ import { wrapStore } from 'react-chrome-redux';
 import runTabListeners from '../../app/services/tabs';
 import runShortcutListeners from '../../app/services/shortcuts';
 import { initIndex, loadIndex } from '../../app/services/elasticlunr';
-import { getIndexKey } from '../../app/services/storage';
+import { INDEX_KEY } from '../../app/constants/Storage';
 import { initApp } from '../../app/actions/current';
 import { resetPopup } from '../../app/actions/search';
 
@@ -16,10 +16,9 @@ runTabListeners(store.dispatch);
 
 initIndex();
 
-// A little weird, would deserve some refacto
-chrome.storage.local.get(getIndexKey(), index => {
-  if (index[getIndexKey()] !== undefined) {
-    loadIndex(index[getIndexKey()]);
+chrome.storage.local.get(INDEX_KEY, index => {
+  if (index[INDEX_KEY] !== undefined) {
+    loadIndex(index[INDEX_KEY]);
   }
   store.dispatch(initApp());
 });

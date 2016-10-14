@@ -27,13 +27,13 @@
     "_execute_browser_action": {
       "suggested_key": {
         "default": "Ctrl+Shift+O",
-        "windows": "Ctrl+Shift+O",
         "mac": "Command+Shift+O",
+        "windows": "Ctrl+Shift+O",
         "chromeos": "Ctrl+Shift+O",
         "linux": "Ctrl+Shift+O"
       }
     }
   },
-  "permissions": [ "management", "tabs", "storage", "<all_urls>", "unlimitedStorage" ],
+  "permissions": [ "management", "tabs", "storage", "<all_urls>", "unlimitedStorage", "identity", "identity.email" ],
   "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
 }

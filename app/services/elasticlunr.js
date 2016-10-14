@@ -1,5 +1,5 @@
 import elasticlunr from 'elasticlunr';
-import { getIndexKey } from '../services/storage';
+import { INDEX_KEY } from '../constants/Storage';
 import { hashCode, cleanUrl } from '../services/util';
 import _ from 'lodash';
 
@@ -53,7 +53,7 @@ export const hasDoc = (url) => {
 };
 
 export const persistIndex = () => {
-  chrome.storage.local.set({ [getIndexKey()]: serialize() });
+  chrome.storage.local.set({ [INDEX_KEY]: serialize() });
 };
 
 export const hydrate = (rawResults) => rawResults.map(raw => Object.assign({},
