@@ -60,12 +60,18 @@ function Results(props) {
           ))}
         </TableBody>
       </Table>
-      {/* TODO DEBUG IT */}
+      {/* target _blank required http://bit.ly/2e5RNt6 */}
       <p className={css(styles.productPain)}>
         <a
           className={css(styles.productPainLink)}
           href="https://productpains.com/product/oh-hi-mark"
+          target="_blank"
         >
+          <img
+            className={css(styles.productPainLogo)}
+            alt="productpains.com"
+            src="img/productpain.png"
+          />
           Something is missing ? Vote for the next feature!
         </a>
       </p>
@@ -94,13 +100,17 @@ const styles = StyleSheet.create({
     ':hover': {
       textDecoration: 'underline',
     }
-  }
+  },
+  productPainLogo: {
+    height: 25,
+    verticalAlign: 'middle',
+  },
 });
 
 Results.propTypes = {
   results: PropTypes.array,
   query: PropTypes.string,
-  selected: PropTypes.string,
+  selected: PropTypes.number,
   selectedId: PropTypes.string,
   actions: PropTypes.object,
 };

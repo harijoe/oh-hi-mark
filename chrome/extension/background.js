@@ -12,7 +12,7 @@ const store = createStore(initialState);
 wrapStore(store, { portName: 'APP' });
 
 runShortcutListeners(store.dispatch);
-runTabListeners(store.dispatch);
+runTabListeners(store);
 
 initIndex();
 

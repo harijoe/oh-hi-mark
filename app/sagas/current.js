@@ -24,6 +24,9 @@ function* handleIconSaga(action) {
 }
 
 function* refreshSavedSaga(action) {
+  if (action.tab.url == null || action.tab.url === '') {
+    return;
+  }
   const saved = yield call(hasDoc, action.tab.url);
   yield put(setSaved(saved));
 }
