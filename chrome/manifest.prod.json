@@ -1,10 +1,10 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "name": "Oh, hi Mark!",
   "manifest_version": 2,
   "description": "Minimalist chrome extension designed to enrich chrome's bookmark with a search functionality and a perfect user experience",
   "browser_action": {
-    "default_title": "OhHiMark!",
+    "default_title": "Oh, hi Mark!",
     "default_popup": "popup.html"
   },
   "icons": {
