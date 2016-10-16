@@ -18,3 +18,5 @@ export const REDIRECT_TO_SELECTED = 'REDIRECT_TO_SELECTED';
 
 // Info
 export const SET_OS = 'SET_OS';
+export const SET_ID = 'SET_ID';
+export const SET_EMAIL = 'SET_EMAIL';
