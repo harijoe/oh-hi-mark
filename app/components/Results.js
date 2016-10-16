@@ -60,10 +60,18 @@ function Results(props) {
           ))}
         </TableBody>
       </Table>
+      <p className={css(styles.sync)}>
+        <a
+          className={css(styles.syncLink, styles.bottomText)}
+          onClick={props.actions.requestToken}
+        >
+          Sync your data!
+        </a>
+      </p>
       {/* target _blank required http://bit.ly/2e5RNt6 */}
       <p className={css(styles.productPain)}>
         <a
-          className={css(styles.productPainLink)}
+          className={css(styles.productPainLink, styles.bottomText)}
           href="https://productpains.com/product/oh-hi-mark"
           target="_blank"
         >
@@ -91,20 +99,31 @@ const styles = StyleSheet.create({
   },
   productPain: {
     textAlign: 'right',
-    marginRight: 10,
+    display: 'inline-block',
+    width: '50%',
   },
   productPainLink: {
-    color: 'grey',
-    fontStyle: 'italic',
-    textDecoration: 'inherit',
-    ':hover': {
-      textDecoration: 'underline',
-    }
+    marginRight: 10,
   },
   productPainLogo: {
     height: 25,
     verticalAlign: 'middle',
   },
+  sync: {
+    display: 'inline-block',
+    width: '50%',
+  },
+  syncLink: {
+    marginLeft: 10,
+  },
+  bottomText: {
+    color: 'grey',
+    fontStyle: 'italic',
+    textDecoration: 'inherit',
+    ':hover': {
+      textDecoration: 'underline',
+    },
+  }
 });
 
 Results.propTypes = {

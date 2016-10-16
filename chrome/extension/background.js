@@ -18,8 +18,6 @@ runTabListeners(store.dispatch, store.getState());
 initInfo(store.dispatch);
 initIndex();
 
-chrome.identity.getAuthToken({ 'interactive': true, account: {id:'104175059223649440696'}}, details => console.log('details', details));
-
 chrome.storage.local.get(INDEX_KEY, index => {
   loadIndex(index[INDEX_KEY]);
   store.dispatch(initApp());

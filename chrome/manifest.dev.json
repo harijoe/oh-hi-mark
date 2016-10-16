@@ -16,7 +16,7 @@
   },
   "oauth2": {
     "client_id": "245516316006-n55gvrmnre7hmq59b7t7mkt79vvcftk6.apps.googleusercontent.com",
-    "scopes": ["profile", "email"]
+    "scopes": ["email"]
   },
   "commands": {
     "toggle-feature-save": {
