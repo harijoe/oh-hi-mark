@@ -6,7 +6,7 @@ function SearchInput(props) {
   if (props.storeLength === 0) {
     return (<div className={css(styles.noDocs)}>
       <p>Your have saved no document yet</p>
-      <p>Press Ctrl+Shift+S on a webpage to save it</p>
+      <p>Press Ctrl+Shift+S on a webpage to save it (Command+Shift+S on mac)</p>
     </div>);
   }
 
