@@ -1,10 +1,12 @@
 import _ from 'lodash';
 import { combineReducers } from 'redux';
 import current from './current';
+import info from './info';
 import search from './search';
 
 const reducers = {
   current,
+  info,
   search,
 };
 

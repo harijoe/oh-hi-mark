@@ -33,7 +33,7 @@ export const initIndex = () => {
 };
 
 export const loadIndex = (serializedIndex) => {
-  if (serializedIndex !== null) {
+  if (serializedIndex != null) {
     index = elasticlunr.Index.load(serializedIndex);
   }
 };

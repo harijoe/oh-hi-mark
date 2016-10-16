@@ -5,23 +5,21 @@ import { IcurrentTabIdSelector } from '../selectors/current';
     Values: active audible favIconUrl height highlighted id incognito index mutedInfo
             pinned selected status title url width windowId
  */
-const handleChange = (store, tabId) => {
+const handleChange = (dispatch, tabId) => {
   chrome.tabs.get(tabId, (tabInfo) => {
-    // if (tabInfo.status === 'complete') {
-    store.dispatch(CurrentActions.setTab(_.pick(tabInfo, ['url', 'title', 'status', 'id'])));
-    // }
+    dispatch(CurrentActions.setTab(_.pick(tabInfo, ['url', 'title', 'status', 'id'])));
   });
 };
 
-export default (store) => {
+export default (dispatch, state) => {
   chrome.tabs.onActivated.addListener(({ tabId }) => {
-    handleChange(store, tabId);
+    handleChange(dispatch, tabId);
   });
   chrome.tabs.onUpdated.addListener((tabId) => {
-    const currentTabId = IcurrentTabIdSelector(store.getState());
+    const currentTabId = IcurrentTabIdSelector(state);
     if (tabId !== currentTabId) {
       return;
     }
-    handleChange(store, tabId);
+    handleChange(dispatch, tabId);
   });
 };
