@@ -1,11 +1,11 @@
 import React from 'react';
-import SearchInputContainer from '../containers/SearchInputContainer';
+import TopBar from '../components/TopBar';
 import ResultsContainer from '../containers/ResultsContainer';
 
 function Root() {
   return (
     <div style={{ margin: 5 }}>
-      <SearchInputContainer />
+      <TopBar />
       <ResultsContainer />
     </div>
   );

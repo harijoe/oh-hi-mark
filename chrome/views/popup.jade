@@ -4,8 +4,18 @@ html
   head
     meta(charset='UTF-8')
     title Redux TodoMVC Example (Popup)
+    link(rel='stylesheet' href='vendor/animate.min.css')
     style.
       body { width: 800px; margin: 0; }
+      @keyframes fadeInLeft {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 0.1;
+        }
+      }
 
   body
     #root

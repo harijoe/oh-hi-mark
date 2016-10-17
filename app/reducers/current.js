@@ -6,6 +6,7 @@ const initialState = new Immutable.Map({
   saved: false,
   tab: null,
   storeInfo: new Immutable.Map(),
+  hoveringSaveBtn: false,
 });
 
 const actionsMap = {
@@ -20,6 +21,9 @@ const actionsMap = {
   },
   [ActionTypes.SET_STORE_INFO](state, action) {
     return state.set('storeInfo', action.info);
+  },
+  [ActionTypes.SET_HOVERING_SAVE_BTN](state, action) {
+    return state.set('hoveringSaveBtn', action.hoveringSaveBtn);
   }
 };
 

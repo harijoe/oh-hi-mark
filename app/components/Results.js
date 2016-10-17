@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import { Table, TableBody, TableHeader,
+  TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import { StyleSheet, css } from 'aphrodite';
 import { cleanUrl } from '../services/util';
 import moment from 'moment';
@@ -65,7 +66,7 @@ function Results(props) {
           className={css(styles.syncLink, styles.bottomText)}
           onClick={props.actions.requestToken}
         >
-          Sync your data!
+          Don't lose your marks, <b>click here</b> to back them up
         </a>
       </p>
       {/* target _blank required http://bit.ly/2e5RNt6 */}
@@ -101,8 +102,10 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     display: 'inline-block',
     width: '50%',
+    fontStyle: 'italic',
   },
   productPainLink: {
+    color: 'grey',
     marginRight: 10,
   },
   productPainLogo: {
@@ -112,13 +115,14 @@ const styles = StyleSheet.create({
   sync: {
     display: 'inline-block',
     width: '50%',
+    color: 'grey',
+    fontStyle: 'italic',
   },
   syncLink: {
     marginLeft: 10,
+    cursor: 'pointer',
   },
   bottomText: {
-    color: 'grey',
-    fontStyle: 'italic',
     textDecoration: 'inherit',
     ':hover': {
       textDecoration: 'underline',

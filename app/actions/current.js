@@ -23,3 +23,7 @@ export function setStoreInfo(info) {
 export function initApp() {
   return { type: types.INIT_APP };
 }
+
+export function setHoveringSaveBtn(hoveringSaveBtn) {
+  return { type: types.SET_HOVERING_SAVE_BTN, hoveringSaveBtn };
+}
