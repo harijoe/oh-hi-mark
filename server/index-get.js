@@ -25,14 +25,10 @@ module.exports = (event, cb) => {
       return S3.getObject({
         Key: email
       }, (error, data) => {
-        console.log('data', data);
-        console.log('VALUE', data == null);
         if (data == null) {
-          console.log('been there srsly!!');
           return cb(404, { message: 'No entry found for this email' });
         }
 
-        console.log('content', JSON.parse(data.Body.toString()));
         if (error != null) {
           return cb(error.statusCode);
         }
@@ -40,7 +36,6 @@ module.exports = (event, cb) => {
       });
     })
     .catch((error) => {
-      console.log('error', error);
       return cb(401, { message: 'Unable to authenticate request' });
     });
 };

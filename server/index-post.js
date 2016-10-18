@@ -36,8 +36,6 @@ module.exports = (event, cb) => {
         payload,
       }),
     }, (error, res) => {
-      console.log('error', error);
-      console.log('data', res);
       if (error != null) {
         return cb(error.statusCode);
       }
@@ -45,7 +43,6 @@ module.exports = (event, cb) => {
     });
   })
   .catch((error) => {
-    console.log('error', error);
     return cb(401, { message: 'Unable to authenticate request' });
   });
 };
