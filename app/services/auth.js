@@ -12,3 +12,5 @@ export const getAuthToken = (id) => new Promise((resolve, reject) => {
     reject(e.message);
   }
 });
+
+export const getIdentity = () => chrome.identity.getProfileUserInfo(userInfo => userInfo);

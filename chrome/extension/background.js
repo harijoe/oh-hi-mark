@@ -8,6 +8,7 @@ import { initApp } from '../../app/actions/current';
 import { resetPopup } from '../../app/actions/search';
 
 const createStore = require('../../app/store/configureStore');
+
 const initialState = {};
 const store = createStore(initialState);
 wrapStore(store, { portName: 'APP' });
@@ -18,7 +19,7 @@ runTabListeners(store.dispatch, store.getState());
 initInfo(store.dispatch);
 initIndex();
 
-chrome.storage.local.get(INDEX_KEY, index => {
+chrome.storage.local.get(INDEX_KEY, (index) => {
   loadIndex(index[INDEX_KEY]);
   store.dispatch(initApp());
 });
