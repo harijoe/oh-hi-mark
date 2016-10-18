@@ -3,23 +3,6 @@ import TextField from 'material-ui/TextField';
 import { StyleSheet, css } from 'aphrodite';
 
 function SearchInput(props) {
-  if (props.storeLength === 0) {
-    const shortcut = props.os === 'mac' ? 'Command+Shift+S' : 'Ctrl+Shift+S';
-    return (<div className={css(styles.noDocs)}>
-      <p>Your have saved no document yet</p>
-      <p>Press <b>{shortcut}</b> on a webpage to save it</p>
-      <p className={css(styles.tip)}>
-        Tip: <a
-          target="_blank"
-          href="chrome://extensions/configureCommands"
-          className={css(styles.tipLink)}
-        >
-         Click here to customize hotkeys
-        </a>
-      </p>
-    </div>);
-  }
-
   return (
     <TextField
       hintText={`Search through ${props.storeLength} documents`}
@@ -34,32 +17,15 @@ function SearchInput(props) {
 }
 
 const styles = StyleSheet.create({
-  noDocs: {
-    textAlign: 'center',
-    color: 'grey',
-  },
   textField: {
     width: '68%',
   },
-  tip: {
-    marginTop: 35,
-    fontStyle: 'italic',
-    textDecoration: 'inherit',
-    ':hover': {
-      textDecoration: 'underline',
-    },
-  },
-  tipLink: {
-    color: 'grey',
-  }
 });
 
 SearchInput.propTypes = {
-  query: PropTypes.string,
   storeLength: PropTypes.number,
-  os: PropTypes.string,
   actions: PropTypes.shape({
-    typeQuery: PropTypes.func,
+    setQuery: PropTypes.func,
   }),
 };
 

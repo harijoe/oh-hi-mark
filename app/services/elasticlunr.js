@@ -1,7 +1,7 @@
 import elasticlunr from 'elasticlunr';
+import _ from 'lodash';
 import { INDEX_KEY } from '../constants/Storage';
 import { hashCode, cleanUrl } from '../services/util';
-import _ from 'lodash';
 
 // TODO Add versioning to fields
 
@@ -27,18 +27,47 @@ export const initIndex = () => {
     return;
   }
   elasticlunr.clearStopWords();
-  index = elasticlunr((config) => {
-    fields.map(field => config.addField(field));
-  });
+  index = createIndex();
 };
+
+export const createIndex = () => elasticlunr((config) => {
+  fields.map(field => config.addField(field));
+});
 
 export const loadIndex = (serializedIndex) => {
   if (serializedIndex != null) {
     index = elasticlunr.Index.load(serializedIndex);
   }
+
 };
 
 export const serialize = () => index.toJSON();
+
+export const serializeStore = () => index.documentStore.toJSON();
+
+/*
+  @return boolean the fact that the merge was useful
+ */
+export const mergeStore = (remoteStore) => {
+  const localStore = serializeStore();
+  if (_.isEqual(localStore, remoteStore)) {
+    return false;
+  }
+  const target = {};
+  _.merge(target, localStore, remoteStore);
+  target.length = Object.keys(target.docs).length;
+
+  if (target.docs != null) {
+    createIndex();
+    _.each(target.docs, doc => index.addDoc(doc));
+  }
+
+  return true;
+};
+
+export const loadStore = (serializedStore) => {
+  index.documentStore = elasticlunr.DocumentStore.load(serializedStore);
+};
 
 export const addDoc = (doc) => {
   const identifiedDoc = Object.assign({}, doc, {
@@ -56,7 +85,7 @@ export const persistIndex = () => {
   chrome.storage.local.set({ [INDEX_KEY]: serialize() });
 };
 
-export const hydrate = (rawResults) => rawResults.map(raw => Object.assign({},
+export const hydrate = rawResults => rawResults.map(raw => Object.assign({},
   _.pick(index.documentStore.getDoc(raw.ref), getFields),
   { id: raw.ref },
 ));

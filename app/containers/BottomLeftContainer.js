@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import SearchInput from '../components/SearchInput';
-import * as SearchActions from '../actions/search';
+import BottomLeft from '../components/BottomLeft';
+import * as AuthActions from '../actions/auth';
 
 export default connect(
   state => Object.assign({}, {
-    storeLength: state.current.storeInfo.length,
+    token: state.auth.token,
   }),
   dispatch => ({ actions: bindActionCreators(Object.assign({},
-    SearchActions,
+    AuthActions,
   ), dispatch) })
-)(SearchInput);
+)(BottomLeft);

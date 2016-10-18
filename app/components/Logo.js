@@ -12,7 +12,6 @@ function Logo(props) {
 }
 
 Logo.propTypes = {
-  os: PropTypes.string,
   hoveringSaveBtn: PropTypes.bool,
 };
 

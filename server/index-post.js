@@ -1,17 +1,24 @@
 const AWS = require('aws-sdk');
 const axios = require('axios');
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+// const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const S3 = new AWS.S3({
+  params: {
+    Bucket: 'oh-hi-mark-indexes'
+  }
+});
 
 module.exports = (event, cb) => {
-  console.log('body', event.body);
+  if (event.headers.Authorization == null) {
+    return cb(401, { message: 'No authorization header found' });
+  }
+  const token = event.headers.Authorization.split(' ')[1];
+
   const data = JSON.parse(event.body);
   if (data.payload == null
   ) {
-    cb(400, { message: 'No payload sent' });
+    return cb(400, { message: 'No payload sent' });
   }
-
-  const token = event.headers.Bearer;
   const payload = data.payload;
 
   return axios.get('https://www.googleapis.com/oauth2/v3/tokeninfo', {
@@ -22,18 +29,23 @@ module.exports = (event, cb) => {
   .then((result) => {
     const email = result.data.email;
     const updatedAt = new Date().getTime();
-    return dynamoDb.put({
-      TableName: 'indexes',
-      Item: {
-        id: email,
-        payload,
+    return S3.putObject({
+      Key: email,
+      Body: JSON.stringify({
         updatedAt,
+        payload,
+      }),
+    }, (error, res) => {
+      console.log('error', error);
+      console.log('data', res);
+      if (error != null) {
+        return cb(error.statusCode);
       }
-    }, (error) => {
-      if (error) {
-        cb(500, { message: error });
-      }
-      cb(201, null);
+      return cb(201, res);
     });
+  })
+  .catch((error) => {
+    console.log('error', error);
+    return cb(401, { message: 'Unable to authenticate request' });
   });
 };

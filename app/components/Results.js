@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
+import moment from 'moment';
 import { Table, TableBody, TableHeader,
   TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import { StyleSheet, css } from 'aphrodite';
 import { cleanUrl } from '../services/util';
-import moment from 'moment';
+import BottomLeftContainer from '../containers/BottomLeftContainer';
 
 function Results(props) {
   if (props.query === '') {
@@ -61,14 +62,7 @@ function Results(props) {
           ))}
         </TableBody>
       </Table>
-      <p className={css(styles.sync)}>
-        <a
-          className={css(styles.syncLink, styles.bottomText)}
-          onClick={props.actions.requestToken}
-        >
-          Don't lose your marks, <b>click here</b> to back them up
-        </a>
-      </p>
+      <BottomLeftContainer />
       {/* target _blank required http://bit.ly/2e5RNt6 */}
       <p className={css(styles.productPain)}>
         <a
@@ -103,6 +97,7 @@ const styles = StyleSheet.create({
     display: 'inline-block',
     width: '50%',
     fontStyle: 'italic',
+    marginBottom: 0,
   },
   productPainLink: {
     color: 'grey',
@@ -111,16 +106,6 @@ const styles = StyleSheet.create({
   productPainLogo: {
     height: 25,
     verticalAlign: 'middle',
-  },
-  sync: {
-    display: 'inline-block',
-    width: '50%',
-    color: 'grey',
-    fontStyle: 'italic',
-  },
-  syncLink: {
-    marginLeft: 10,
-    cursor: 'pointer',
   },
   bottomText: {
     textDecoration: 'inherit',

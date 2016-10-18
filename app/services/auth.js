@@ -1,15 +1,15 @@
-export const getAuthToken = (id) => new Promise((resolve, reject) => {
+export const getAuthToken = (id, interactive = true) => new Promise((resolve, reject) => {
   try {
     chrome.identity.getAuthToken({
-      interactive: true,
+      interactive,
       account: {
         id,
       }
-    }, token => {
+    }, (token) => {
       resolve(token);
     });
   } catch (e) {
-    reject(e.message);
+    resolve(null);
   }
 });
 

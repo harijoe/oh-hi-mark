@@ -1,17 +1,14 @@
 import React from 'react';
-import TopBar from '../components/TopBar';
+import TopBarContainer from '../containers/TopBarContainer';
 import ResultsContainer from '../containers/ResultsContainer';
 
 function Root() {
   return (
     <div style={{ margin: 5 }}>
-      <TopBar />
+      <TopBarContainer />
       <ResultsContainer />
     </div>
   );
 }
-
-Root.propTypes = {
-};
 
 export default Root;

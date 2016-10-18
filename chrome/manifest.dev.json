@@ -40,5 +40,5 @@
     }
   },
   "permissions": [ "management", "tabs", "storage", "<all_urls>", "unlimitedStorage", "identity", "identity.email" ],
-  "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
+  "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000 https://n6d0avuw04.execute-api.eu-west-1.amazonaws.com; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
 }

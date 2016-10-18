@@ -6,6 +6,8 @@ import { setIcon } from '../services/icon';
 import { injectExtraction, injectToastr } from '../services/inject';
 import { addDoc, persistIndex, hasDoc, info } from '../services/elasticlunr';
 import { IcurrentTabSelector, IextractionSelector, IsavedSelector } from '../selectors/current';
+import { ItokenSelector } from '../selectors/auth';
+import { pushStore } from '../services/sync';
 
 function* savePageSaga() {
   const saved = yield select(IsavedSelector);
@@ -36,15 +38,20 @@ function* handleExtractionSaga() {
   yield call(addDoc, extraction.toJS());
   yield call(persistIndex);
 
+  const token = yield select(ItokenSelector);
+  if (token != null) {
+    yield call(pushStore);
+  }
+
   const tab = yield select(IcurrentTabSelector);
   yield* refreshSavedSaga(setTab(tab.toJS()));
   yield* setStoreInfoSaga();
 }
 
-function* setStoreInfoSaga() {
+export const setStoreInfoSaga = function* () {
   const storeInfo = yield call(info);
   yield put(setStoreInfo(storeInfo));
-}
+};
 
 export default function* () {
   yield [

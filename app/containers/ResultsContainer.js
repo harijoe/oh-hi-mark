@@ -13,7 +13,6 @@ export default connect(
     selectedId: selectedIdSelector(state),
   }),
   dispatch => ({ actions: bindActionCreators(Object.assign({},
-    AuthActions,
     SearchActions,
   ), dispatch) })
 )(Results);
