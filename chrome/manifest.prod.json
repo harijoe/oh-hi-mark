@@ -1,8 +1,9 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "name": "Oh, hi Mark!",
   "manifest_version": 2,
-  "description": "Minimalist chrome extension designed to enrich chrome's bookmark with a search functionality and a perfect user experience",
+  "description": "Smart bookmark with search functionality for chrome",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlAq6mxcYWOl76RtVAUG5NSpwO1AiMx528EaFtgMaGsoqcs6aqSzmoD8a88GnpNPcDYPmQry5WBG3/yBIyEeLSiqawhpsw6taDvNx8vfMksmlL3EDE2P6CVug5TIv3rsR45D9Hr9ZH9G5KiYVJU6p6GZ/yPBHHmVxV0RGMOHFxFl/UOf/4kRm+Sz4YenLNsCZZ9r7Amzzea1Jd8jKOGcijZq+sKOLorE+t5obr6N6cZK5Hy2UhPq08be6KikR4JtTjVxUXLgRNoxBDWLTLOiF8dOXuJaswC0kJyjMzfLZz0+WY6dQQpdKobE690YaAdXO+9841bGKwycjxkrmTk32zwIDAQAB",
   "browser_action": {
     "default_title": "Oh, hi Mark!",
     "default_popup": "popup.html"
@@ -12,6 +13,10 @@
   },
   "background": {
     "page": "background.html"
+  },
+  "oauth2": {
+    "client_id": "245516316006-n55gvrmnre7hmq59b7t7mkt79vvcftk6.apps.googleusercontent.com",
+    "scopes": ["email"]
   },
   "commands": {
     "toggle-feature-save": {
