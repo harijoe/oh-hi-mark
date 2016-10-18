@@ -10,6 +10,9 @@ const initialState = new Immutable.Map({
 });
 
 const actionsMap = {
+  [ActionTypes.RESET_POPUP](state) {
+    return state.set('hoveringSaveBtn', false);
+  },
   [ActionTypes.SET_SAVED](state, action) {
     return state.set('saved', action.saved);
   },
