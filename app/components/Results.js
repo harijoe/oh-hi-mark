@@ -5,8 +5,12 @@ import { Table, TableBody, TableHeader,
 import { StyleSheet, css } from 'aphrodite';
 import { cleanUrl } from '../services/util';
 import BottomLeftContainer from '../containers/BottomLeftContainer';
+import NoDocumentContainer from '../containers/NoDocumentContainer';
 
 function Results(props) {
+  if (props.storeLength === 0) {
+    return <NoDocumentContainer />;
+  }
   if (props.query === '') {
     return false;
   }
@@ -117,6 +121,7 @@ const styles = StyleSheet.create({
 
 Results.propTypes = {
   results: PropTypes.array,
+  storeLength: PropTypes.number,
   query: PropTypes.string,
   selected: PropTypes.number,
   selectedId: PropTypes.string,

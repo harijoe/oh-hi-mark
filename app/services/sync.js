@@ -8,6 +8,8 @@ export const fetchStore = () => {
       const store = JSON.parse(uncompressed);
 
       return store;
+      // // FOR DEV
+      // return {};
     })
     .catch(error => null)
   ;
@@ -23,9 +25,7 @@ export const pushStore = () => {
 
 export const syncStore = async function syncStore () {
   const remoteStore = await fetchStore();
-
   const usefulMerge = mergeStore(remoteStore);
-  console.log('usefulMerge', usefulMerge);
   if (usefulMerge) {
     await pushStore();
     persistIndex();

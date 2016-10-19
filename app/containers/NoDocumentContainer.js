@@ -9,7 +9,5 @@ export default connect(
     os: state.info.os,
   }),
   dispatch => ({ actions: bindActionCreators(Object.assign({},
-    AuthActions,
-    CurrentActions,
   ), dispatch) })
 )(NoDocument);

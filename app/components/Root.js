@@ -1,11 +1,10 @@
 import React from 'react';
-import TopBarContainer from '../containers/TopBarContainer';
+import TopBar from '../components/TopBar';
 import ResultsContainer from '../containers/ResultsContainer';
 
 function Root() {
-  return (
-    <div style={{ margin: 5 }}>
-      <TopBarContainer />
+  return (<div style={{ margin: 5 }}>
+      <TopBar />
       <ResultsContainer />
     </div>
   );

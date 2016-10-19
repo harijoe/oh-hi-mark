@@ -9,6 +9,7 @@ export default connect(
   state => Object.assign({}, {
     query: state.search.query,
     results: state.search.results,
+    storeLength: state.current.storeInfo.length,
     selected: state.search.selected,
     selectedId: selectedIdSelector(state),
   }),

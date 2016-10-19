@@ -39,6 +39,6 @@
       }
     }
   },
-  "permissions": [ "management", "tabs", "storage", "<all_urls>", "unlimitedStorage", "identity", "identity.email" ],
+  "permissions": [ "tabs", "storage", "<all_urls>", "unlimitedStorage", "identity", "identity.email" ],
   "content_security_policy": "default-src 'self'; script-src 'self'; connect-src https://n6d0avuw04.execute-api.eu-west-1.amazonaws.com; style-src * 'unsafe-inline'; img-src 'self' data:;"
 }

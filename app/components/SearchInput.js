@@ -3,9 +3,12 @@ import TextField from 'material-ui/TextField';
 import { StyleSheet, css } from 'aphrodite';
 
 function SearchInput(props) {
+  const label = props.storeLength === 0
+    ? 'No documents yet, read below to add one first  :-)'
+    : `Search through ${props.storeLength} documents`;
   return (
     <TextField
-      hintText={`Search through ${props.storeLength} documents`}
+      hintText={label}
       hintStyle={{ marginLeft: 10 }}
       inputStyle={{ marginLeft: 10 }}
       className={css(styles.textField)}
