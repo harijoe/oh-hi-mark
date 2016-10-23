@@ -32,5 +32,6 @@ export default function* () {
   yield [
     takeLatest(ActionTypes.REQUEST_TOKEN, startOAuthFlowSaga),
     takeLatest(ActionTypes.INIT_APP, retrieveOAuthSaga),
+    takeLatest(ActionTypes.RESET_POPUP, retrieveOAuthSaga),
   ];
 }

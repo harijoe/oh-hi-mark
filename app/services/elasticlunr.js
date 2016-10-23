@@ -4,6 +4,7 @@ import { INDEX_KEY } from '../constants/Storage';
 import { hashCode, cleanUrl } from '../services/util';
 
 // TODO Add versioning to fields
+// TODO Add doc to each function
 
 let index;
 const fields = ['title', 'authors', 'description', 'text', 'url', 'publisher', 'date', 'favicon'];
