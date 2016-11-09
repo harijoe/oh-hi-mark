@@ -6,7 +6,8 @@ export const SET_TAB = 'SET_TAB';
 export const SET_SAVED = 'SET_SAVED';
 export const SET_EXTRACTION = 'SET_EXTRACTION';
 export const SET_STORE_INFO = 'SET_STORE_INFO';
-export const SET_HOVERING_SAVE_BTN = 'SET_HOVERING_SAVE_BTN';
+export const SET_SHOW_TOOLTIP = 'SET_SHOW_TOOLTIP';
+export const SET_FORBIDDEN_URL = 'SET_FORBIDDEN_URL';
 
 // Search
 export const SET_QUERY = 'SET_QUERY';

@@ -43,8 +43,7 @@ const styles = StyleSheet.create({
 
 BottomLeft.propTypes = {
   token: PropTypes.string,
-  email: PropTypes.string,
-  actions: PropTypes.obj,
+  actions: PropTypes.object,
 };
 
 export default BottomLeft;

@@ -24,6 +24,10 @@ export function initApp() {
   return { type: types.INIT_APP };
 }
 
-export function setHoveringSaveBtn(hoveringSaveBtn) {
-  return { type: types.SET_HOVERING_SAVE_BTN, hoveringSaveBtn };
+export function setShowTooltip(showTooltip) {
+  return { type: types.SET_SHOW_TOOLTIP, showTooltip };
+}
+
+export function setForbiddenURL(forbiddenURL) {
+  return { type: types.SET_FORBIDDEN_URL, forbiddenURL };
 }

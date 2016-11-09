@@ -1,7 +1,7 @@
 import { takeLatest } from 'redux-saga';
 import { call, put, select } from 'redux-saga/effects';
 import * as ActionTypes from '../constants/ActionTypes';
-import { setToken } from '../actions/auth';
+import { setToken } from '../actions/info';
 import * as InfoSelectors from '../selectors/info';
 import { getAuthToken } from '../services/auth';
 import { initAxios } from '../services/axios';

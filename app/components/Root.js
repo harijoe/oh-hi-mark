@@ -4,10 +4,9 @@ import ResultsContainer from '../containers/ResultsContainer';
 
 function Root() {
   return (<div style={{ margin: 5 }}>
-      <TopBar />
-      <ResultsContainer />
-    </div>
-  );
+    <TopBar />
+    <ResultsContainer />
+  </div>);
 }
 
 export default Root;

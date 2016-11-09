@@ -1,9 +1,21 @@
 import React, { PropTypes } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+
 function Logo(props) {
-  if (props.hoveringSaveBtn) {
+  if (props.showTooltip) {
+    const goToConfigureCommands = () => {
+      chrome.tabs.update({ url: 'chrome://extensions/configureCommands' });
+      props.actions.setShowTooltip(false);
+      window.close();
+    };
+
     return (<p className={css(styles.tooltip)}>
-      <b>Tip:</b> Be faster, use a shortcut next time!
+      <b>Tip:</b> Be faster next time <br />
+      <a
+        href="#"
+        className={css(styles.shortcutLink)}
+        onClick={goToConfigureCommands}
+      >use a shortcut!</a>
     </p>);
   }
   return (
@@ -12,7 +24,8 @@ function Logo(props) {
 }
 
 Logo.propTypes = {
-  hoveringSaveBtn: PropTypes.bool,
+  showTooltip: PropTypes.bool,
+  actions: PropTypes.object,
 };
 
 
@@ -35,7 +48,14 @@ const styles = StyleSheet.create({
     marginLeft: 19,
     borderRadius: 9,
     padding: 5,
-  }
+  },
+  shortcutLink: {
+    color: 'yellow',
+    textDecoration: 'none',
+    ':hover': {
+      textDecoration: 'underline'
+    }
+  },
 });
 
 

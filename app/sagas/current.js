@@ -1,12 +1,12 @@
 import { takeEvery } from 'redux-saga';
 import { call, put, select } from 'redux-saga/effects';
 import * as ActionTypes from '../constants/ActionTypes';
-import { setSaved, setTab, setStoreInfo } from '../actions/current';
+import { setSaved, setTab, setStoreInfo, setForbiddenURL } from '../actions/current';
 import { setIcon } from '../services/icon';
 import { injectExtraction, injectToastr } from '../services/inject';
 import { addDoc, persistIndex, hasDoc, info } from '../services/elasticlunr';
 import { IcurrentTabSelector, IextractionSelector, IsavedSelector } from '../selectors/current';
-import { ItokenSelector } from '../selectors/auth';
+import { ItokenSelector } from '../selectors/info';
 import { pushStore } from '../services/sync';
 
 function* savePageSaga() {
@@ -27,8 +27,15 @@ function* handleIconSaga(action) {
 
 function* refreshSavedSaga(action) {
   if (action.tab.url == null || action.tab.url === '') {
+    yield put(setSaved(false));
     return;
   }
+
+  // Check if URL is injectable
+  const injectableRegexp =
+    new RegExp(/(^chrome.*)|(^https?:\/\/chrome\.google\.com\/webstore\/.*)/g);
+  yield put(setForbiddenURL(injectableRegexp.test(action.tab.url)));
+
   const saved = yield call(hasDoc, action.tab.url);
   yield put(setSaved(saved));
 }
@@ -43,9 +50,11 @@ function* handleExtractionSaga() {
     yield call(pushStore);
   }
 
+  yield* setStoreInfoSaga();
+
+  // Force refresh of saved
   const tab = yield select(IcurrentTabSelector);
   yield* refreshSavedSaga(setTab(tab.toJS()));
-  yield* setStoreInfoSaga();
 }
 
 export const setStoreInfoSaga = function* () {

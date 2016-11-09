@@ -5,11 +5,27 @@ import DoneIcon from 'material-ui/svg-icons/action/done';
 import { StyleSheet, css } from 'aphrodite';
 
 function SaveButton(props) {
+  const handleSaveBtnClick = () => {
+    props.actions.setShowTooltip(true);
+    props.actions.savePage();
+  };
+
+  if (props.forbiddenURL) {
+    return (
+      <FloatingActionButton
+        mini
+        className={css(styles.button)}
+        disabled
+      >
+        <BookmarkIcon />
+      </FloatingActionButton>
+    );
+  }
+
   if (props.saved) {
     return (<FloatingActionButton
       mini
       className={css(styles.button)}
-      onClick={props.actions.savePage()}
       disabled
     >
       <DoneIcon />
@@ -19,9 +35,7 @@ function SaveButton(props) {
     <FloatingActionButton
       mini
       className={css(styles.button)}
-      onClick={props.actions.savePage}
-      onMouseEnter={() => props.actions.setHoveringSaveBtn(true)}
-      onMouseLeave={() => props.actions.setHoveringSaveBtn(false)}
+      onClick={handleSaveBtnClick}
     >
       <BookmarkIcon />
     </FloatingActionButton>
@@ -38,6 +52,7 @@ const styles = StyleSheet.create({
 
 SaveButton.propTypes = {
   saved: PropTypes.bool,
+  forbiddenURL: PropTypes.bool,
   actions: PropTypes.object,
 };
 

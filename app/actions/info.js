@@ -11,3 +11,11 @@ export function setId(id) {
 export function setEmail(email) {
   return { type: types.SET_EMAIL, email };
 }
+
+export function requestToken() {
+  return { type: types.REQUEST_TOKEN };
+}
+
+export function setToken(token) {
+  return { type: types.SET_TOKEN, token };
+}
