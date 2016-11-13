@@ -1,3 +1,4 @@
+// TODO surely we can make it simpler, bluebird ?
 export const getAuthToken = (id, interactive = true) => new Promise((resolve) => {
   try {
     chrome.identity.getAuthToken({

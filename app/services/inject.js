@@ -43,7 +43,7 @@ const injectResources = (files) => {
   };
 
   return Promise.all(files.map(resource => new Promise((resolve, reject) => {
-    const ext = getFileExtension.exec(resource)[1];
+    const ext = getFileExtension.exec(resource)[1]; // Unsafe
     const loadFunction = loadFunctionForExtension(ext);
     loadFunction(null, { file: resource }, () => {
       if (chrome.runtime.lastError) {

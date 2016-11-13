@@ -1,5 +1,6 @@
 import * as SearchActions from '../../app/actions/search';
 
+// TODO Add comments for more clarity
 export default (dispatch) => {
   document.onkeydown = (e) => {
     switch (e.keyCode) {

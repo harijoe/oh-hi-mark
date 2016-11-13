@@ -2,6 +2,11 @@ import React, { PropTypes } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 function BottomLeft(props) {
+  /*
+     TODO
+     We shouldn't check only the token
+     Marks are "synced" if they were actually retrieved from AWS
+   */
   if (props.token != null) {
     return (<p className={css(styles.sync)}>
       <span className={css(styles.backedup)}>Marks successfully backed up</span>

@@ -5,6 +5,7 @@ import { hashCode, cleanUrl } from '../services/util';
 
 // TODO Add versioning to fields
 // TODO Add doc to each function
+// TODO Add tests
 
 let index;
 const fields = ['title', 'authors', 'description', 'text', 'url', 'publisher', 'date', 'favicon'];
@@ -39,7 +40,6 @@ export const loadIndex = (serializedIndex) => {
   if (serializedIndex != null) {
     index = elasticlunr.Index.load(serializedIndex);
   }
-
 };
 
 export const serialize = () => index.toJSON();
