@@ -99,3 +99,9 @@ export const search = query => index.search(query,
 export const info = () => ({
   length: index.documentStore.length,
 });
+
+export const getLatestResults = () => {
+  return _.sortBy(index.documentStore.docs, 'date')
+    .slice(-MAX_RESULTS)
+    .reverse();
+};

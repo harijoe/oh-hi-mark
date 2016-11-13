@@ -16,6 +16,10 @@ export function setSelected(selected) {
   return { type: types.SET_SELECTED, selected };
 }
 
+export function setLatestResults(latestResults) {
+  return { type: types.SET_LATEST_RESULTS, latestResults };
+}
+
 export function incrementSelected() {
   return { type: types.INCREMENT_SELECTED };
 }
