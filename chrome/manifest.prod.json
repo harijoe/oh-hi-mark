@@ -2,7 +2,7 @@
   "version": "0.2.3",
   "name": "Oh, hi Mark!",
   "manifest_version": 2,
-  "description": "Smart bookmark with search functionality for chrome",
+  "description": "Bookmarks manager with smart search for chrome",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlAq6mxcYWOl76RtVAUG5NSpwO1AiMx528EaFtgMaGsoqcs6aqSzmoD8a88GnpNPcDYPmQry5WBG3/yBIyEeLSiqawhpsw6taDvNx8vfMksmlL3EDE2P6CVug5TIv3rsR45D9Hr9ZH9G5KiYVJU6p6GZ/yPBHHmVxV0RGMOHFxFl/UOf/4kRm+Sz4YenLNsCZZ9r7Amzzea1Jd8jKOGcijZq+sKOLorE+t5obr6N6cZK5Hy2UhPq08be6KikR4JtTjVxUXLgRNoxBDWLTLOiF8dOXuJaswC0kJyjMzfLZz0+WY6dQQpdKobE690YaAdXO+9841bGKwycjxkrmTk32zwIDAQAB",
   "browser_action": {
     "default_title": "Oh, hi Mark!",
@@ -21,13 +21,15 @@
   "commands": {
     "toggle-feature-save": {
       "suggested_key": {
-        "default": "Ctrl+Shift+S"
+        "default": "Alt+S",
+        "mac": "Alt+S"
       },
       "description": "Saves the current page"
     },
     "_execute_browser_action": {
       "suggested_key": {
-        "default": "Ctrl+Shift+O"
+        "default": "Alt+S",
+        "mac": "Alt+S"
       }
     }
   },
