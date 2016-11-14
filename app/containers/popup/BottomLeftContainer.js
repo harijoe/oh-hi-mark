@@ -1,11 +1,14 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import NoDocument from '../components/NoDocument';
+import BottomLeft from '../../components/popup/BottomLeft';
+import * as InfoActions from '../../actions/info';
 
 export default connect(
   state => Object.assign({}, {
-    os: state.info.os,
+    token: state.info.token,
+    synced: state.store.synced,
   }),
   dispatch => ({ actions: bindActionCreators(Object.assign({},
+    InfoActions,
   ), dispatch) })
-)(NoDocument);
+)(BottomLeft);

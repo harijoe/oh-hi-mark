@@ -3,11 +3,13 @@ import { combineReducers } from 'redux';
 import current from './current';
 import info from './info';
 import search from './search';
+import store from './store';
 
 const reducers = {
   current,
   info,
   search,
+  store,
 };
 
 // This is some magic to make the reducers work while keeping clean syntax in them

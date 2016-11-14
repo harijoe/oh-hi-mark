@@ -1,14 +1,13 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import SaveButton from '../components/SaveButton';
-import * as CurrentActions from '../actions/current';
+import SearchInput from '../../components/popup/SearchInput';
+import * as SearchActions from '../../actions/search';
 
 export default connect(
   state => Object.assign({}, {
-    saved: state.current.saved,
-    forbiddenURL: state.current.forbiddenURL,
+    storeLength: state.store.storeInfo.length,
   }),
   dispatch => ({ actions: bindActionCreators(Object.assign({},
-    CurrentActions,
+    SearchActions,
   ), dispatch) })
-)(SaveButton);
+)(SearchInput);

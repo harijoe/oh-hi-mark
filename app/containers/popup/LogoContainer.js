@@ -1,14 +1,13 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Results from '../components/Results';
+import Logo from '../../components/popup/Logo';
+import * as CurrentActions from '../../actions/current';
 
 export default connect(
   state => Object.assign({}, {
-    query: state.search.query,
-    results: state.search.results,
-    latestResults: state.search.latestResults,
-    storeLength: state.current.storeInfo.length,
+    showTooltip: state.current.showTooltip,
   }),
   dispatch => ({ actions: bindActionCreators(Object.assign({},
+    CurrentActions,
   ), dispatch) })
-)(Results);
+)(Logo);

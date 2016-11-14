@@ -4,8 +4,8 @@ import { Table, TableBody, TableHeader,
   TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import moment from 'moment';
 import BottomRight from './BottomRight';
-import { cleanUrl } from '../services/util';
-import BottomLeftContainer from '../containers/BottomLeftContainer';
+import { cleanUrl } from '../../services/util';
+import BottomLeftContainer from '../../containers/popup/BottomLeftContainer';
 
 function ResultsTable(props) {
   const onRowOver = id => () => {

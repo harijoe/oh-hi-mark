@@ -8,7 +8,7 @@ import { initAxios } from '../services/axios';
 import { syncStore } from '../services/sync';
 import { setStoreInfoSaga } from './current';
 import { setLatestResults } from '../actions/search';
-import { setSynced } from '../actions/current';
+import { setSynced } from '../actions/store';
 import { getLatestResults } from '../../app/services/elasticlunr';
 
 function* startOAuthFlowSaga() {

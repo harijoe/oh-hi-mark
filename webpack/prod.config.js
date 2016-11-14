@@ -4,6 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     background: [path.join(__dirname, '../chrome/extension/background')],
+    manager: [path.join(__dirname, '../chrome/extension/manager')],
     popup: [path.join(__dirname, '../chrome/extension/popup')],
     'inject-extraction': [path.join(__dirname, '../chrome/extension/inject-extraction')],
     'inject-toastr': [path.join(__dirname, '../chrome/extension/inject-toastr')],

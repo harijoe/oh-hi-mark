@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import BookmarkIcon from 'material-ui/svg-icons/action/bookmark';
+import AddIcon from 'material-ui/svg-icons/content/add';
 import DoneIcon from 'material-ui/svg-icons/action/done';
 import { StyleSheet, css } from 'aphrodite';
 
@@ -17,7 +17,7 @@ function SaveButton(props) {
         className={css(styles.button)}
         disabled
       >
-        <BookmarkIcon />
+        <AddIcon />
       </FloatingActionButton>
     );
   }
@@ -37,7 +37,7 @@ function SaveButton(props) {
       className={css(styles.button)}
       onClick={handleSaveBtnClick}
     >
-      <BookmarkIcon />
+      <AddIcon />
     </FloatingActionButton>
   );
 }

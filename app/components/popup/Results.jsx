@@ -1,8 +1,8 @@
 import { StyleSheet, css } from 'aphrodite';
 import React, { PropTypes } from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
-import ResultsTableContainer from '../containers/ResultsTableContainer';
-import NoDocumentContainer from '../containers/NoDocumentContainer';
+import ResultsTableContainer from '../../containers/popup/ResultsTableContainer';
+import NoDocumentContainer from '../../containers/popup/NoDocumentContainer';
 
 function Results(props) {
   if (props.storeLength === 0) {

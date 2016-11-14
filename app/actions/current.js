@@ -16,10 +16,6 @@ export function setExtraction(extraction) {
   return { type: types.SET_EXTRACTION, extraction };
 }
 
-export function setStoreInfo(info) {
-  return { type: types.SET_STORE_INFO, info };
-}
-
 export function initApp() {
   return { type: types.INIT_APP };
 }
@@ -30,8 +26,4 @@ export function setShowTooltip(showTooltip) {
 
 export function setForbiddenURL(forbiddenURL) {
   return { type: types.SET_FORBIDDEN_URL, forbiddenURL };
-}
-
-export function setSynced(synced) {
-  return { type: types.SET_SYNCED, synced };
 }

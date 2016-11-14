@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Logo from '../components/Logo';
-import * as CurrentActions from '../actions/current';
+import SaveButton from '../../components/popup/SaveButton';
+import * as CurrentActions from '../../actions/current';
 
 export default connect(
   state => Object.assign({}, {
-    showTooltip: state.current.showTooltip,
+    saved: state.current.saved,
+    forbiddenURL: state.current.forbiddenURL,
   }),
   dispatch => ({ actions: bindActionCreators(Object.assign({},
     CurrentActions,
   ), dispatch) })
-)(Logo);
+)(SaveButton);

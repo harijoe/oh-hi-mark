@@ -1,6 +1,6 @@
 import React from 'react';
-import TopBar from '../components/TopBar';
-import ResultsContainer from '../containers/ResultsContainer';
+import TopBar from './TopBar';
+import ResultsContainer from '../../containers/popup/ResultsContainer';
 
 function Root() {
   return (<div style={{ margin: 5 }}>

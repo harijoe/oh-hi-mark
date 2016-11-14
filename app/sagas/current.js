@@ -1,7 +1,8 @@
 import { takeEvery } from 'redux-saga';
 import { call, put, select } from 'redux-saga/effects';
 import * as ActionTypes from '../constants/ActionTypes';
-import { setSaved, setTab, setStoreInfo, setForbiddenURL } from '../actions/current';
+import { setSaved, setTab, setForbiddenURL } from '../actions/current';
+import { setStoreInfo } from '../actions/store';
 import { setIcon } from '../services/icon';
 import { injectExtraction, injectToastr } from '../services/inject';
 import { addDoc, persistIndex, hasDoc, info } from '../services/elasticlunr';
