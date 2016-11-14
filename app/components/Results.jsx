@@ -1,5 +1,6 @@
 import { StyleSheet, css } from 'aphrodite';
 import React, { PropTypes } from 'react';
+import CircularProgress from 'material-ui/CircularProgress';
 import ResultsTableContainer from '../containers/ResultsTableContainer';
 import NoDocumentContainer from '../containers/NoDocumentContainer';
 
@@ -7,7 +8,14 @@ function Results(props) {
   if (props.storeLength === 0) {
     return <NoDocumentContainer />;
   }
+
   if (props.query === '') {
+    if (props.latestResults.length === 0) {
+      return (<div className={css(styles.loading)}>
+        <CircularProgress />
+      </div>);
+    }
+
     return (<ResultsTableContainer
       isLatestResults
       results={props.latestResults}
@@ -15,7 +23,7 @@ function Results(props) {
   }
 
   if (props.results.length === 0) {
-    return <p className={css(styles.noResult)}>No result</p>;
+    return <p className={css(styles.noResult)}>No result found — Try something else</p>;
   }
 
   return (
@@ -31,6 +39,11 @@ const styles = StyleSheet.create({
     color: 'grey',
     height: 60,
     lineHeight: '60px',
+  },
+  loading: {
+    textAlign: 'center',
+    color: 'grey',
+    margin: 50,
   },
 });
 

@@ -42,6 +42,13 @@ function* refreshSavedSaga(action) {
 
 function* handleExtractionSaga() {
   const extraction = yield select(IextractionSelector);
+
+  // Case where extraction when wrong
+  if (extraction == null) {
+    yield put(setSaved(false));
+    return;
+  }
+
   yield call(addDoc, extraction.toJS());
   yield call(persistIndex);
 
@@ -54,7 +61,10 @@ function* handleExtractionSaga() {
 
   // Force refresh of saved
   const tab = yield select(IcurrentTabSelector);
-  yield* refreshSavedSaga(setTab(tab.toJS()));
+
+  if (tab != null) {
+    yield* refreshSavedSaga(setTab(tab.toJS()));
+  }
 }
 
 export const setStoreInfoSaga = function* () {

@@ -20,14 +20,21 @@ export const pushStore = () => {
 
   return axios.post('index', {
     payload: serializedStore
-  });
+  }).then(res => res.status)
+    .catch(error => null);
 };
 
+// TODO Handle error in a more secure way
 export const syncStore = async function syncStore () {
   const remoteStore = await fetchStore();
   const usefulMerge = mergeStore(remoteStore);
   if (usefulMerge) {
-    await pushStore();
+    const status = await pushStore();
+    if (status !== 201) {
+      return false;
+    }
     persistIndex();
   }
+
+  return true;
 }

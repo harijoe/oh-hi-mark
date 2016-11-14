@@ -3,6 +3,7 @@ import { StyleSheet, css } from 'aphrodite';
 import { Table, TableBody, TableHeader,
   TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import moment from 'moment';
+import BottomRight from './BottomRight';
 import { cleanUrl } from '../services/util';
 import BottomLeftContainer from '../containers/BottomLeftContainer';
 
@@ -17,6 +18,9 @@ function ResultsTable(props) {
     props.actions.redirectToSelected();
   };
 
+  if (props.results[props.selected] == null) {
+    return false;
+  }
   const selectedId = props.results[props.selected].id;
   const latestResultsStyle = props.isLatestResults ? { color: 'grey' } : {};
 
@@ -59,21 +63,7 @@ function ResultsTable(props) {
       </Table>
       <BottomLeftContainer />
       {/* target _blank required http://bit.ly/2e5RNt6 */}
-      <p className={css(styles.productPain)}>
-        <a
-          className={css(styles.productPainLink, styles.bottomText)}
-          href="https://productpains.com/product/oh-hi-mark"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            className={css(styles.productPainLogo)}
-            alt="productpains.com"
-            src="img/productpain.png"
-          />
-          Something is missing ? Vote for the next feature!
-        </a>
-      </p>
+      <BottomRight />
     </div>
   );
 }
@@ -83,27 +73,6 @@ const styles = StyleSheet.create({
   tableRow: {
     cursor: 'pointer',
   },
-  productPain: {
-    textAlign: 'right',
-    display: 'inline-block',
-    width: '50%',
-    fontStyle: 'italic',
-    marginBottom: 0,
-  },
-  productPainLink: {
-    color: 'grey',
-    marginRight: 10,
-  },
-  productPainLogo: {
-    height: 25,
-    verticalAlign: 'middle',
-  },
-  bottomText: {
-    textDecoration: 'inherit',
-    ':hover': {
-      textDecoration: 'underline',
-    },
-  }
 });
 
 ResultsTable.propTypes = {

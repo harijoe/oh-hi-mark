@@ -7,6 +7,9 @@ import { getAuthToken } from '../services/auth';
 import { initAxios } from '../services/axios';
 import { syncStore } from '../services/sync';
 import { setStoreInfoSaga } from './current';
+import { setLatestResults } from '../actions/search';
+import { setSynced } from '../actions/current';
+import { getLatestResults } from '../../app/services/elasticlunr';
 
 function* startOAuthFlowSaga() {
   const id = yield select(InfoSelectors.IidSelector);
@@ -21,11 +24,19 @@ function* retrieveOAuthSaga() {
 }
 
 function* handleTokenSaga(token) {
-  if (token == null) { return; }
-  yield call(initAxios, token);
-  yield put(setToken(token));
-  yield call(syncStore);
+  if (token != null) {
+    yield call(initAxios, token);
+    yield put(setToken(token));
+    const synced = yield call(syncStore);
+    yield put(setSynced(synced));
+  }
   yield* setStoreInfoSaga();
+  yield* retrieveLatestResultsSaga();
+}
+
+function* retrieveLatestResultsSaga() {
+  const latestResults = yield call(getLatestResults);
+  yield put(setLatestResults(latestResults));
 }
 
 export default function* () {

@@ -8,6 +8,7 @@ export const SET_EXTRACTION = 'SET_EXTRACTION';
 export const SET_STORE_INFO = 'SET_STORE_INFO';
 export const SET_SHOW_TOOLTIP = 'SET_SHOW_TOOLTIP';
 export const SET_FORBIDDEN_URL = 'SET_FORBIDDEN_URL';
+export const SET_SYNCED = 'SET_SYNCED';
 
 // Search
 export const SET_QUERY = 'SET_QUERY';

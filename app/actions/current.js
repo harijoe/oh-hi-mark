@@ -31,3 +31,7 @@ export function setShowTooltip(showTooltip) {
 export function setForbiddenURL(forbiddenURL) {
   return { type: types.SET_FORBIDDEN_URL, forbiddenURL };
 }
+
+export function setSynced(synced) {
+  return { type: types.SET_SYNCED, synced };
+}

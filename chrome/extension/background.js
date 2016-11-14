@@ -10,6 +10,7 @@ import { resetPopup } from '../../app/actions/search';
 const createStore = require('../../app/store/configureStore');
 
 const initialState = {};
+console.log('INITIALIZING');
 const store = createStore(initialState);
 wrapStore(store, { portName: 'APP' });
 
@@ -22,11 +23,6 @@ initIndex();
 chrome.storage.local.get(INDEX_KEY, (index) => {
   loadIndex(index[INDEX_KEY]);
   store.dispatch(initApp());
-});
-
-const connect = chrome.runtime.connect();
-connect.onDisconnect.addListener(() => {
-  store.dispatch(resetPopup());
 });
 
 // Try to add a listener to the store to this if it's immutable data

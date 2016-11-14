@@ -12,6 +12,7 @@ const handleChange = (dispatch, tabId) => {
 };
 
 export default (dispatch, state) => {
+  // TODO Bug when app is loaded, tab is not filled
   chrome.tabs.onActivated.addListener(({ tabId }) => {
     handleChange(dispatch, tabId);
   });

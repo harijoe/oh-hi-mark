@@ -7,12 +7,17 @@ const initialState = new Immutable.Map({
   tab: null,
   storeInfo: new Immutable.Map(),
   showTooltip: false,
-  forbiddenURL: false,
+  forbiddenURL: true,
+  synced: null,
 });
 
 const actionsMap = {
   [ActionTypes.RESET_POPUP](state) {
-    return state.set('hoveringSaveBtn', false);
+    const synced = state.get('synced') === false ? null : true;
+    return state.merge({
+      hoveringSaveBtn: false,
+      synced,
+    });
   },
   [ActionTypes.SET_SAVED](state, action) {
     return state.set('saved', action.saved);
@@ -31,6 +36,9 @@ const actionsMap = {
   },
   [ActionTypes.SET_FORBIDDEN_URL](state, action) {
     return state.set('forbiddenURL', action.forbiddenURL);
+  },
+  [ActionTypes.SET_SYNCED](state, action) {
+    return state.set('synced', action.synced);
   }
 };
 

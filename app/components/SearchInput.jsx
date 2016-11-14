@@ -4,7 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 function SearchInput(props) {
   const label = props.storeLength === 0
-    ? 'No documents yet, read below to add one first  :-)'
+    ? 'No documents yet, read below'
     : `Search through ${props.storeLength} documents`;
   return (
     <TextField

@@ -5,7 +5,7 @@ function NoDocument(props) {
   // const shortcut = props.os === 'mac' ? 'Command+Shift+S' : 'Ctrl+Shift+S';
   return (<div className={css(styles.noDocs)}>
     <p>Hi there, It's time to save your first document!</p>
-    <p className={css(styles.tip)}><b>Click on the big blue button</b></p>
+    <p className={css(styles.tip)}><b>Head to your favorite article</b> — and — <b>click on the big blue button</b></p>
   </div>);
 }
 
