@@ -1,5 +1,5 @@
 {
-  "version": "0.2.2",
+  "version": "0.2.3",
   "name": "Oh, hi Mark!",
   "manifest_version": 2,
   "description": "Smart bookmark with search functionality for chrome",
@@ -21,21 +21,13 @@
   "commands": {
     "toggle-feature-save": {
       "suggested_key": {
-        "default": "Ctrl+Shift+S",
-        "mac": "Command+Shift+S",
-        "windows": "Ctrl+Shift+S",
-        "chromeos": "Ctrl+Shift+S",
-        "linux": "Ctrl+Shift+S"
+        "default": "Ctrl+Shift+S"
       },
       "description": "Saves the current page"
     },
     "_execute_browser_action": {
       "suggested_key": {
-        "default": "Ctrl+Shift+O",
-        "mac": "Command+Shift+O",
-        "windows": "Ctrl+Shift+O",
-        "chromeos": "Ctrl+Shift+O",
-        "linux": "Ctrl+Shift+O"
+        "default": "Ctrl+Shift+O"
       }
     }
   },

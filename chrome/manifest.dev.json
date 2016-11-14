@@ -1,5 +1,5 @@
 {
-  "version": "0.2.2",
+  "version": "0.2.3",
   "name": "Oh, hi Mark!",
   "manifest_version": 2,
   "description": "Smart bookmark with search functionality for chrome",
@@ -25,7 +25,7 @@
       },
       "description": "Saves the current page"
     },
-    "_execute_page_action": {
+    "_execute_browser_action": {
       "suggested_key": {
         "default": "Ctrl+Shift+O"
       }
