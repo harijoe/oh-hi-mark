@@ -37,7 +37,7 @@ function BottomLeft(props) {
 const styles = StyleSheet.create({
   sync: {
     display: 'inline-block',
-    width: '38%',
+    width: '50%',
     color: 'grey',
     fontStyle: 'italic',
     marginBottom: 0,

@@ -6,6 +6,8 @@ import { StyleSheet, css } from 'aphrodite';
 import { extensionID } from '../../constants/Config';
 
 function FlatButtonExampleIcon() {
+  return false;
+
   const handleClick = () => {
     const managerURL = `chrome-extension://${extensionID}/manager.html`;
     chrome.tabs.create({ url: managerURL });
