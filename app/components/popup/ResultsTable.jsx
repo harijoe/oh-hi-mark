@@ -6,6 +6,7 @@ import moment from 'moment';
 import BottomRight from './BottomRight';
 import { cleanUrl } from '../../services/util';
 import BottomLeftContainer from '../../containers/popup/BottomLeftContainer';
+import CornerLeft from './CornerLeft';
 
 function ResultsTable(props) {
   const onRowOver = id => () => {
@@ -61,6 +62,7 @@ function ResultsTable(props) {
           ))}
         </TableBody>
       </Table>
+      <CornerLeft />
       <BottomLeftContainer />
       {/* target _blank required http://bit.ly/2e5RNt6 */}
       <BottomRight />
