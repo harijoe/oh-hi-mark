@@ -23,6 +23,7 @@ const searchConfig = {
   }
 };
 const MAX_RESULTS = 6;
+const removedDocs = new Set();
 
 export const initIndex = () => {
   if (index !== undefined) {
@@ -63,6 +64,10 @@ export const mergeStore = (remoteStore) => {
     _.each(target.docs, doc => index.addDoc(doc));
   }
 
+  // Make sure removed docs on client side are eventually removed
+  removedDocs.forEach(id => index.removeDocByRef(id));
+  removedDocs.clear();
+
   return true;
 };
 
@@ -75,6 +80,12 @@ export const addDoc = (doc) => {
     id: hashCode(cleanUrl(doc.url)),
   });
   index.addDoc(identifiedDoc);
+};
+
+export const removeDoc = (url) => {
+  const idToRemove = hashCode(cleanUrl(url));
+  index.removeDocByRef(idToRemove);
+  removedDocs.add(idToRemove);
 };
 
 export const hasDoc = (url) => {

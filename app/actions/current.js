@@ -4,6 +4,10 @@ export function savePage() {
   return { type: types.SAVE_PAGE };
 }
 
+export function removePage() {
+  return { type: types.REMOVE_PAGE };
+}
+
 export function setTab(tab) {
   return { type: types.SET_TAB, tab };
 }

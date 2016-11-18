@@ -2,6 +2,7 @@ export const INIT_APP = 'INIT_APP';
 
 // Current
 export const SAVE_PAGE = 'SAVE_PAGE';
+export const REMOVE_PAGE = 'REMOVE_PAGE';
 export const SET_TAB = 'SET_TAB';
 export const SET_SAVED = 'SET_SAVED';
 export const SET_EXTRACTION = 'SET_EXTRACTION';

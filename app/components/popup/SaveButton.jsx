@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
+import { StyleSheet, css } from 'aphrodite';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import AddIcon from 'material-ui/svg-icons/content/add';
-import DoneIcon from 'material-ui/svg-icons/action/done';
-import { StyleSheet, css } from 'aphrodite';
+import SavedButton from './SavedButton';
 
 function SaveButton(props) {
   const handleSaveBtnClick = () => {
@@ -23,13 +23,10 @@ function SaveButton(props) {
   }
 
   if (props.saved) {
-    return (<FloatingActionButton
-      mini
+    return (<SavedButton
       className={css(styles.button)}
-      disabled
-    >
-      <DoneIcon />
-    </FloatingActionButton>);
+      removePage={props.actions.removePage}
+    />);
   }
   return (
     <FloatingActionButton

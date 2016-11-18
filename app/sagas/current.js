@@ -5,7 +5,7 @@ import { setSaved, setTab, setForbiddenURL } from '../actions/current';
 import { setStoreInfo } from '../actions/store';
 import { setIcon } from '../services/icon';
 import { injectExtraction, injectToastr } from '../services/inject';
-import { addDoc, persistIndex, hasDoc, info } from '../services/elasticlunr';
+import { addDoc, removeDoc, persistIndex, hasDoc, info } from '../services/elasticlunr';
 import { IcurrentTabSelector, IextractionSelector, IsavedSelector } from '../selectors/current';
 import { ItokenSelector } from '../selectors/info';
 import { pushStore } from '../services/sync';
@@ -20,6 +20,17 @@ function* savePageSaga() {
     injectExtraction();
   });
   yield put(setSaved(true));
+}
+
+function* removePageSaga() {
+  const saved = yield select(IsavedSelector);
+  const tab = yield select(IcurrentTabSelector);
+  if (!saved) {
+    return;
+  }
+  yield put(setSaved(false));
+  yield call(removeDoc, tab.get('url'));
+  yield* handleUpdatedIndexSaga();
 }
 
 function* handleIconSaga(action) {
@@ -51,6 +62,11 @@ function* handleExtractionSaga() {
   }
 
   yield call(addDoc, extraction.toJS());
+
+  yield* handleUpdatedIndexSaga();
+}
+
+function* handleUpdatedIndexSaga() {
   yield call(persistIndex);
 
   const token = yield select(ItokenSelector);
@@ -75,6 +91,7 @@ export const setStoreInfoSaga = function* () {
 export default function* () {
   yield [
     takeEvery(ActionTypes.SAVE_PAGE, savePageSaga),
+    takeEvery(ActionTypes.REMOVE_PAGE, removePageSaga),
     takeEvery(ActionTypes.SET_EXTRACTION, handleExtractionSaga),
     takeEvery(ActionTypes.SET_SAVED, handleIconSaga),
     takeEvery(ActionTypes.SET_TAB, refreshSavedSaga),
