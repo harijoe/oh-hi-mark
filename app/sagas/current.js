@@ -62,7 +62,6 @@ function* handleExtractionSaga() {
 
   // Force refresh of saved
   const tab = yield select(IcurrentTabSelector);
-
   if (tab != null) {
     yield* refreshSavedSaga(setTab(tab.toJS()));
   }

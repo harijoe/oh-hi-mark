@@ -25,6 +25,9 @@ const actionsMap = {
   [ActionTypes.SET_FORBIDDEN_URL](state, action) {
     return state.set('forbiddenURL', action.forbiddenURL);
   },
+  [ActionTypes.RESET_POPUP](state) {
+    return state.set('showTooltip', false);
+  },
 };
 
 export default {

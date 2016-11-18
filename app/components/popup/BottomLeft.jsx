@@ -3,11 +3,6 @@ import { StyleSheet, css } from 'aphrodite';
 import LinearProgress from 'material-ui/LinearProgress';
 
 function BottomLeft(props) {
-  /*
-     TODO
-     We shouldn't check only the token
-     Marks are "synced" if they were actually retrieved from AWS
-   */
   if (props.token != null) {
     if (props.synced === null) {
       return (<p className={css(styles.sync)}>
