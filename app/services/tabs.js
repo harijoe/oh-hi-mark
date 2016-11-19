@@ -1,5 +1,5 @@
-import * as CurrentActions from '../../app/actions/current';
 import _ from 'lodash';
+import * as CurrentActions from '../../app/actions/current';
 import { IcurrentTabIdSelector } from '../selectors/current';
 /*
     Values: active audible favIconUrl height highlighted id incognito index mutedInfo
@@ -11,13 +11,12 @@ const handleChange = (dispatch, tabId) => {
   });
 };
 
-export default (dispatch, state) => {
-  // TODO Bug when app is loaded, tab is not filled
+export default (dispatch, getState) => {
   chrome.tabs.onActivated.addListener(({ tabId }) => {
     handleChange(dispatch, tabId);
   });
   chrome.tabs.onUpdated.addListener((tabId) => {
-    const currentTabId = IcurrentTabIdSelector(state);
+    const currentTabId = IcurrentTabIdSelector(getState());
     if (tabId !== currentTabId) {
       return;
     }

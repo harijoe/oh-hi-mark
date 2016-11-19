@@ -5,17 +5,15 @@ import { initIndex, loadIndex } from '../../app/services/elasticlunr';
 import initInfo from '../../app/services/info';
 import { INDEX_KEY } from '../../app/constants/Storage';
 import { initApp } from '../../app/actions/current';
-import { resetPopup } from '../../app/actions/search';
 
 const createStore = require('../../app/store/configureStore');
 
 const initialState = {};
-console.log('INITIALIZING');
 const store = createStore(initialState);
 wrapStore(store, { portName: 'APP' });
 
 runShortcutListeners(store.dispatch);
-runTabListeners(store.dispatch, store.getState());
+runTabListeners(store.dispatch, store.getState);
 
 initInfo(store.dispatch);
 initIndex();

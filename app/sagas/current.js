@@ -9,6 +9,7 @@ import { addDoc, removeDoc, persistIndex, hasDoc, info } from '../services/elast
 import { IcurrentTabSelector, IextractionSelector, IsavedSelector } from '../selectors/current';
 import { ItokenSelector } from '../selectors/info';
 import { pushStore } from '../services/sync';
+import { isURLForbidden } from '../services/util';
 
 function* savePageSaga() {
   const saved = yield select(IsavedSelector);
@@ -44,9 +45,7 @@ function* refreshSavedSaga(action) {
   }
 
   // Check if URL is injectable
-  const injectableRegexp =
-    new RegExp(/(^chrome.*)|(^https?:\/\/chrome\.google\.com\/webstore\/.*)/g);
-  yield put(setForbiddenURL(injectableRegexp.test(action.tab.url)));
+  yield put(setForbiddenURL(isURLForbidden(action.tab.url)));
 
   const saved = yield call(hasDoc, action.tab.url);
   yield put(setSaved(saved));

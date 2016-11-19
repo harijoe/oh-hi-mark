@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import AddIcon from 'material-ui/svg-icons/content/add';
+import ForbiddenIcon from 'material-ui/svg-icons/av/not-interested';
 import SavedButton from './SavedButton';
 
 function SaveButton(props) {
@@ -17,7 +18,7 @@ function SaveButton(props) {
         className={css(styles.button)}
         disabled
       >
-        <AddIcon />
+        <ForbiddenIcon />
       </FloatingActionButton>
     );
   }

@@ -18,3 +18,9 @@ export const cleanUrl = (url) => {
   result = result.split('://');
   return result.length > 0 ? result[1] : result[0];
 };
+
+export const isURLForbidden = (url) => {
+  const injectableRegexp =
+    new RegExp(/(^chrome.*)|(^https?:\/\/chrome\.google\.com\/webstore\/.*)/g);
+  return injectableRegexp.test(url);
+}
