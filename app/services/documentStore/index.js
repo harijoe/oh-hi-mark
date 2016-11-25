@@ -25,7 +25,6 @@ export default class DocumentStore
   };
 
   removeDoc = (url) => {
-    console.log('URL TO REMOVE', url);
     const id = idFromUrl(url);
     delete this.documents[id];
     this.removedDocs.add(id);
@@ -53,7 +52,6 @@ export default class DocumentStore
    */
   merge = (documentStore) => {
     // TODO Check if param is a documentStore ?
-    console.log('DOC STORE', documentStore);
     if (this.equals(documentStore)) {
       return false;
     }
@@ -71,8 +69,6 @@ export default class DocumentStore
   };
 
   count = () => {
-    console.log('COUNTING', Object.keys(this.documents).length);
-    console.log(this.documents);
     return Object.keys(this.documents).length;
   }
 }

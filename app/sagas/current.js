@@ -33,7 +33,6 @@ function* removePageSaga() {
   }
   yield put(setSaved(false));
   store.removeDoc(tab.get('url'));
-  console.log('REMOVED');
   yield* setStoreInfoSaga();
   yield* retrieveLatestResultsSaga();
   yield* handleUpdatedIndexSaga();
@@ -71,9 +70,7 @@ function* handleExtractionSaga() {
 }
 
 function* handleUpdatedIndexSaga() {
-  console.log(store.getDocuments());
   yield call(localStorage.push, store);
-  console.log('SAVED!!');
 
   const token = yield select(ItokenSelector);
   if (token != null) {
@@ -89,16 +86,13 @@ function* handleUpdatedIndexSaga() {
 
 function* fetchStoreSaga() {
   const remoteStore = yield call(localStorage.fetch);
-  console.log('REMOTE', remoteStore);
   setStore(remoteStore); // TODO Check if store is actually updated
-  console.log('retrieving latest...');
   yield* retrieveLatestResultsSaga();
   yield* setStoreInfoSaga();
 }
 
 export const setStoreInfoSaga = function* () {
   const storeInfo = { length: store.count() };
-  console.log('storeInfo', storeInfo);
   yield put(setStoreInfo(storeInfo));
 };
 

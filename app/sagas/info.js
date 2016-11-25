@@ -28,14 +28,12 @@ function* handleTokenSaga(token) {
   if (token != null) {
     yield call(initAxios, token);
     yield put(setToken(token));
-    console.log('sync store saga');
     const synced = yield* syncStoreSaga();
     yield put(setSynced(synced));
   }
 }
 
 function* syncStoreSaga() {
-  console.log('sync store saga');
   const remoteStore = yield call(awsStorage.fetch);
 
   const usefulMerge = store.merge(remoteStore);
@@ -54,11 +52,9 @@ function* syncStoreSaga() {
 }
 
 export const retrieveLatestResultsSaga = function* () {
-  console.log('LATEST DOCS', store.getDocuments());
   const latestResults = _.sortBy(store.getDocuments(), 'date')
     .slice(-6) // Max results
     .reverse();
-  console.log('LATEST', latestResults);
   yield put(setLatestResults(latestResults));
 };
 
