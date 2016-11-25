@@ -1,4 +1,4 @@
-export const hashCode = (input) => {
+const hashCode = (input) => {
   let hash = 0;
   let i;
   let chr;
@@ -12,6 +12,10 @@ export const hashCode = (input) => {
   return hash;
 };
 
+/*
+  Exported functions
+ */
+// TODO need tests
 export const cleanUrl = (url) => {
   let result = '';
   result = url.split('?')[0].split('#')[0];
@@ -19,8 +23,10 @@ export const cleanUrl = (url) => {
   return result.length > 0 ? result[1] : result[0];
 };
 
+export const idFromUrl = url => hashCode(cleanUrl(url));
+
 export const isURLForbidden = (url) => {
   const injectableRegexp =
     new RegExp(/(^chrome.*)|(^https?:\/\/chrome\.google\.com\/webstore\/.*)/g);
   return injectableRegexp.test(url);
-}
+};

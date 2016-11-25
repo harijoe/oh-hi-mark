@@ -5,11 +5,12 @@ import { setToken } from '../actions/info';
 import * as InfoSelectors from '../selectors/info';
 import { getAuthToken } from '../services/auth';
 import { initAxios } from '../services/axios';
-import { syncStore } from '../services/sync';
 import { setStoreInfoSaga } from './current';
 import { setLatestResults } from '../actions/search';
 import { setSynced } from '../actions/store';
-import { getLatestResults } from '../../app/services/elasticlunr';
+import * as awsStorage from '../services/documentStore/awsStorage';
+import * as localStorage from '../services/documentStore/localStorage';
+import store, { setStore } from '../services/documentStore/container';
 
 function* startOAuthFlowSaga() {
   const id = yield select(InfoSelectors.IidSelector);
@@ -27,17 +28,39 @@ function* handleTokenSaga(token) {
   if (token != null) {
     yield call(initAxios, token);
     yield put(setToken(token));
-    const synced = yield call(syncStore);
+    console.log('sync store saga');
+    const synced = yield* syncStoreSaga();
     yield put(setSynced(synced));
   }
-  yield* setStoreInfoSaga();
-  yield* retrieveLatestResultsSaga();
 }
 
-function* retrieveLatestResultsSaga() {
-  const latestResults = yield call(getLatestResults);
-  yield put(setLatestResults(latestResults));
+function* syncStoreSaga() {
+  console.log('sync store saga');
+  const remoteStore = yield call(awsStorage.fetch);
+
+  const usefulMerge = store.merge(remoteStore);
+  if (usefulMerge) {
+    const status = yield call(awsStorage.push, store);
+    if (status !== 201) {
+      return false;
+    }
+    setStore(store); // TODO check if yield is neededs
+    yield* retrieveLatestResultsSaga();
+    yield* setStoreInfoSaga();
+    yield call(localStorage.push, store);
+  }
+
+  return true;
 }
+
+export const retrieveLatestResultsSaga = function* () {
+  console.log('LATEST DOCS', store.getDocuments());
+  const latestResults = _.sortBy(store.getDocuments(), 'date')
+    .slice(-6) // Max results
+    .reverse();
+  console.log('LATEST', latestResults);
+  yield put(setLatestResults(latestResults));
+};
 
 export default function* () {
   yield [

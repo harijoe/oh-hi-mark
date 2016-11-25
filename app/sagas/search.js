@@ -2,13 +2,14 @@ import { takeLatest } from 'redux-saga';
 import { call, put, select } from 'redux-saga/effects';
 import * as ActionTypes from '../constants/ActionTypes';
 import { setResults, setSelected } from '../actions/search';
-import { search, hydrate } from '../../app/services/elasticlunr';
+import store from '../services/documentStore/container';
+import Search from '../services/documentStore/search';
 import * as SearchSelectors from '../selectors/search';
 import * as CurrentSelectors from '../selectors/current';
 
 function* getResultsSaga(action) {
-  const rawResults = yield call(search, action.query);
-  const results = hydrate(rawResults);
+  const searchEngine = new Search(store);
+  const results = yield call(searchEngine.search, action.query);
   yield put(setResults(results));
   yield put(setSelected(0));
 }

@@ -28,8 +28,8 @@
     },
     "_execute_browser_action": {
       "suggested_key": {
-        "default": "Alt+S",
-        "mac": "Alt+S"
+        "default": "Alt+O",
+        "mac": "Alt+O"
       }
     }
   },

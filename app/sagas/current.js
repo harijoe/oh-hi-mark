@@ -5,11 +5,13 @@ import { setSaved, setTab, setForbiddenURL } from '../actions/current';
 import { setStoreInfo } from '../actions/store';
 import { setIcon } from '../services/icon';
 import { injectExtraction, injectToastr } from '../services/inject';
-import { addDoc, removeDoc, persistIndex, hasDoc, info } from '../services/elasticlunr';
+import store, { setStore } from '../services/documentStore/container';
+import * as localStorage from '../services/documentStore/localStorage';
+import * as awsStorage from '../services/documentStore/awsStorage';
 import { IcurrentTabSelector, IextractionSelector, IsavedSelector } from '../selectors/current';
 import { ItokenSelector } from '../selectors/info';
-import { pushStore } from '../services/sync';
 import { isURLForbidden } from '../services/util';
+import { retrieveLatestResultsSaga } from './info';
 
 function* savePageSaga() {
   const saved = yield select(IsavedSelector);
@@ -30,7 +32,10 @@ function* removePageSaga() {
     return;
   }
   yield put(setSaved(false));
-  yield call(removeDoc, tab.get('url'));
+  store.removeDoc(tab.get('url'));
+  console.log('REMOVED');
+  yield* setStoreInfoSaga();
+  yield* retrieveLatestResultsSaga();
   yield* handleUpdatedIndexSaga();
 }
 
@@ -46,34 +51,34 @@ function* refreshSavedSaga(action) {
 
   // Check if URL is injectable
   yield put(setForbiddenURL(isURLForbidden(action.tab.url)));
-
-  const saved = yield call(hasDoc, action.tab.url);
+  const saved = store.hasDoc(action.tab.url);
   yield put(setSaved(saved));
 }
 
 function* handleExtractionSaga() {
   const extraction = yield select(IextractionSelector);
 
-  // Case where extraction when wrong
+  // Case where extraction went wrong
   if (extraction == null) {
     yield put(setSaved(false));
     return;
   }
 
-  yield call(addDoc, extraction.toJS());
-
+  store.addDoc(extraction.toJS());
+  yield* setStoreInfoSaga();
+  yield* retrieveLatestResultsSaga();
   yield* handleUpdatedIndexSaga();
 }
 
 function* handleUpdatedIndexSaga() {
-  yield call(persistIndex);
+  console.log(store.getDocuments());
+  yield call(localStorage.push, store);
+  console.log('SAVED!!');
 
   const token = yield select(ItokenSelector);
   if (token != null) {
-    yield call(pushStore);
+    yield call(awsStorage.push, store);
   }
-
-  yield* setStoreInfoSaga();
 
   // Force refresh of saved
   const tab = yield select(IcurrentTabSelector);
@@ -82,8 +87,18 @@ function* handleUpdatedIndexSaga() {
   }
 }
 
+function* fetchStoreSaga() {
+  const remoteStore = yield call(localStorage.fetch);
+  console.log('REMOTE', remoteStore);
+  setStore(remoteStore); // TODO Check if store is actually updated
+  console.log('retrieving latest...');
+  yield* retrieveLatestResultsSaga();
+  yield* setStoreInfoSaga();
+}
+
 export const setStoreInfoSaga = function* () {
-  const storeInfo = yield call(info);
+  const storeInfo = { length: store.count() };
+  console.log('storeInfo', storeInfo);
   yield put(setStoreInfo(storeInfo));
 };
 
@@ -94,6 +109,6 @@ export default function* () {
     takeEvery(ActionTypes.SET_EXTRACTION, handleExtractionSaga),
     takeEvery(ActionTypes.SET_SAVED, handleIconSaga),
     takeEvery(ActionTypes.SET_TAB, refreshSavedSaga),
-    takeEvery(ActionTypes.INIT_APP, setStoreInfoSaga),
+    takeEvery(ActionTypes.INIT_APP, fetchStoreSaga),
   ];
 }
