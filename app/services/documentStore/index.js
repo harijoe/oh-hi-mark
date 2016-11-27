@@ -10,6 +10,8 @@ export default class DocumentStore
   constructor(documents = {}) {
     this.documents = documents;
     this.removedDocs = new Set();
+    this.updateListeners = [];
+    this.onUpdate();
   }
 
   getDocuments = () => this.documents;
@@ -22,12 +24,14 @@ export default class DocumentStore
     const id = idFromUrl(doc.url);
     const docWithId = Object.assign({}, doc, { id });
     this.documents[id] = docWithId;
+    this.onUpdate();
   };
 
   removeDoc = (url) => {
     const id = idFromUrl(url);
     delete this.documents[id];
     this.removedDocs.add(id);
+    this.onUpdate();
   };
 
   hasDoc = url => this.documents[idFromUrl(url)] != null;
@@ -64,11 +68,14 @@ export default class DocumentStore
     // Make sure removed docs on client side are eventually removed
     this.removedDocs.forEach(id => this.removeDoc(id));
     this.removedDocs.clear();
+    this.onUpdate();
 
     return true;
   };
 
-  count = () => {
-    return Object.keys(this.documents).length;
-  }
+  count = () => Object.keys(this.documents).length;
+
+  onUpdate = () => this.updateListeners.map(listener => listener());
+
+  addListener = listener => this.updateListeners.push(listener);
 }
