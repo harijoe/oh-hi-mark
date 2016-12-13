@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = {
+module.exports = [{
   entry: {
     background: [path.join(__dirname, '../chrome/extension/background')],
     manager: [path.join(__dirname, '../chrome/extension/manager')],
@@ -53,4 +53,22 @@ module.exports = {
   node: {
     fs: 'empty'
   }
-};
+}, {
+  entry: {
+    segment: [path.join(__dirname, '../chrome/extension/segment')],
+  },
+  output: {
+    path: path.join(__dirname, '../dev/js'),
+    filename: '[name].bundle.js',
+    chunkFilename: '[id].chunk.js'
+  },
+  resolve: {
+    extensions: ['.js']
+  },
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loader: 'file',
+    }],
+  },
+}];

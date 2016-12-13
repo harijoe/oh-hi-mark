@@ -1,3 +1,4 @@
+import { EventTypes } from 'redux-segment';
 import * as types from '../constants/ActionTypes';
 
 export function setOs(os) {
@@ -5,11 +6,35 @@ export function setOs(os) {
 }
 
 export function setId(id) {
-  return { type: types.SET_ID, id };
+  return {
+    type: types.SET_ID,
+    id,
+    meta: {
+      analytics: {
+        eventType: EventTypes.identify,
+        eventPayload: {
+          userId: id,
+        }
+      },
+    },
+  };
 }
 
 export function setEmail(email) {
-  return { type: types.SET_EMAIL, email };
+  return {
+    type: types.SET_EMAIL,
+    email,
+    meta: {
+      analytics: {
+        eventType: EventTypes.identify,
+        eventPayload: {
+          traits: {
+            email,
+          }
+        }
+      },
+    },
+  };
 }
 
 export function requestToken() {

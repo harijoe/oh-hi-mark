@@ -1,11 +1,26 @@
+import { EventTypes } from 'redux-segment';
 import * as types from '../constants/ActionTypes';
 
 export function savePage() {
-  return { type: types.SAVE_PAGE };
+  return {
+    type: types.SAVE_PAGE,
+    meta: {
+      analytics: {
+        eventType: EventTypes.track,
+      },
+    },
+  };
 }
 
 export function removePage() {
-  return { type: types.REMOVE_PAGE };
+  return {
+    type: types.REMOVE_PAGE,
+    meta: {
+      analytics: {
+        eventType: EventTypes.track,
+      },
+    },
+  };
 }
 
 export function setTab(tab) {
@@ -21,11 +36,25 @@ export function setExtraction(extraction) {
 }
 
 export function initApp() {
-  return { type: types.INIT_APP };
+  return {
+    type: types.INIT_APP,
+    meta: {
+      analytics: {
+        eventType: EventTypes.track,
+      },
+    },
+  };
 }
 
 export function setShowTooltip(showTooltip) {
-  return { type: types.SET_SHOW_TOOLTIP, showTooltip };
+  return {
+    type: types.SET_SHOW_TOOLTIP, showTooltip,
+    meta: {
+      analytics: {
+        eventType: EventTypes.track,
+      },
+    },
+  };
 }
 
 export function setForbiddenURL(forbiddenURL) {

@@ -9,7 +9,7 @@ function Results(props) {
     return <NoDocumentContainer />;
   }
 
-  if (props.query === '') {
+  if (props.query === '' || props.results === null) {
     if (props.latestResults.length === 0) {
       return (<div className={css(styles.loading)}>
         <CircularProgress />

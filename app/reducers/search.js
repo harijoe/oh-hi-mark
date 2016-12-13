@@ -3,7 +3,7 @@ import * as ActionTypes from '../constants/ActionTypes';
 
 const initialState = new Immutable.Map({
   query: '',
-  results: new Immutable.List(),
+  results: null,
   latestResults: new Immutable.List(),
   selected: null,
 });
