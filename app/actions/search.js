@@ -1,3 +1,4 @@
+import { EventTypes } from 'redux-segment';
 import * as types from '../constants/ActionTypes';
 
 export function setQuery(query) {
@@ -9,7 +10,14 @@ export function setResults(results) {
 }
 
 export function resetPopup() {
-  return { type: types.RESET_POPUP };
+  return {
+    type: types.RESET_POPUP,
+    meta: {
+      analytics: {
+        eventType: EventTypes.track,
+      },
+    },
+  };
 }
 
 export function setSelected(selected) {
@@ -29,5 +37,12 @@ export function decrementSelected() {
 }
 
 export function redirectToSelected() {
-  return { type: types.REDIRECT_TO_SELECTED };
+  return {
+    type: types.REDIRECT_TO_SELECTED,
+    meta: {
+      analytics: {
+        eventType: EventTypes.track,
+      },
+    },
+  };
 }

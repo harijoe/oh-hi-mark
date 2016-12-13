@@ -1,7 +1,7 @@
 import elasticlunr from 'elasticlunr';
 import _ from 'lodash';
 
-elasticlunr.tokenizer.setSeperator(/[\s\-\/.]+/)
+elasticlunr.tokenizer.setSeperator(/[\s\-\/.]+/);
 elasticlunr.clearStopWords();
 elasticlunr.stemmer = str => str;
 delete elasticlunr.Pipeline.registeredFunctions['stemmer'];
@@ -39,6 +39,7 @@ export default class Search
     Object.values(documentStore.getDocuments()).map(doc => this.idx.addDoc(doc));
   }
 
+  // TODO Needs to be tested
   search = rawQuery => {
     // OPTIM: Prevent result stuttering
     const query = rawQuery
@@ -51,7 +52,7 @@ export default class Search
 
     if (rawResults.length === 0) { return []; }
 
-    // OPTIM: Remove unrelevant results
+    // OPTIM: Removes unrelevant results
     const maxScore = rawResults[0].score;
     const results = rawResults.filter(res => res.score > maxScore / 8);
 

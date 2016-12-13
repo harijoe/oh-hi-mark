@@ -13,9 +13,9 @@ wrapStore(store, { portName: 'APP' });
 runShortcutListeners(store.dispatch);
 runTabListeners(store.dispatch, store.getState);
 
-initInfo(store.dispatch);
-
-store.dispatch(initApp());
+initInfo(store.dispatch)
+  .then(() => store.dispatch(initApp()))
+;
 
 // Try to add a listener to the store to this if it's immutable data
 // Suspect redux saga

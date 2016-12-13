@@ -54,8 +54,10 @@ export default class DocumentStore
       @param DocumentStore
       @return boolean
    */
-  merge = (documentStore) => {
+  merge = (documentStoreParam) => {
     // TODO Check if param is a documentStore ?
+    // TODO APPARENTLY BROKEN
+    const documentStore = documentStoreParam != null ? documentStoreParam : new DocumentStore();
     if (this.equals(documentStore)) {
       return false;
     }

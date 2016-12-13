@@ -1,5 +1,6 @@
 import axios from '../axios';
 import DocumentStore from '../documentStore';
+import { compress, decompress } from '../jsonCompressor';
 
 /*
  Utility class to store/retrieve to/from the aws
@@ -12,10 +13,13 @@ import DocumentStore from '../documentStore';
  @return Promise(boolean)
  */
 export const push = documentStore => axios.post('index', {
-  payload: JSON.stringify(documentStore.getDocuments())
+  payload: compress({
+    docs: documentStore.getDocuments(),
+    version: 1,
+  })
 })
   .then(res => res.status)
-  .catch(() => null) // Maybe handle error more nicely ?
+  .catch(e => null) // Maybe handle error more nicely ?
 ;
 
 /*
@@ -23,6 +27,7 @@ export const push = documentStore => axios.post('index', {
  @return Promise(DocumentStore)
  */
 export const fetch = () => axios.get('index')
-  .then(response => JSON.parse(response.data.payload))
-  .then(documents => new DocumentStore(documents))
+  .then(response => decompress(response.data.payload))
+  .then(payload => (payload != null ? new DocumentStore(payload.docs) : new DocumentStore()))
+  .catch(e => new DocumentStore())
 ;

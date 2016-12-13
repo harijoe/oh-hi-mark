@@ -68,6 +68,34 @@ const baseDevConfig = () => ({
   }
 });
 
+const baseSegmentConfig = () => ({
+  entry: {
+    segment: [path.join(__dirname, '../chrome/extension/segment')],
+  },
+  devMiddleware: {
+    publicPath: `http://${host}:${port}/js`,
+    stats: {
+      colors: true,
+      errorDetails: true
+    },
+    noInfo: true
+  },
+  output: {
+    path: path.join(__dirname, '../dev/js'),
+    filename: '[name].bundle.js',
+    chunkFilename: '[id].chunk.js'
+  },
+  resolve: {
+    extensions: ['', '.js']
+  },
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loader: 'script-loader',
+    }],
+  },
+});
+
 const injectPageConfig = baseDevConfig();
 injectPageConfig.entry = {
   'inject-extraction': path.join(__dirname, '../chrome/extension/inject-extraction'),
@@ -81,8 +109,10 @@ injectPageConfig.output = {
   filename: '[name].bundle.js',
 };
 const appConfig = baseDevConfig();
+const segmentConfig = baseSegmentConfig();
 
 module.exports = [
   appConfig,
-  injectPageConfig
+  injectPageConfig,
+  segmentConfig,
 ];
