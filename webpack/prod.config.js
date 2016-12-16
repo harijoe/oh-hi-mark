@@ -63,12 +63,12 @@ module.exports = [{
     chunkFilename: '[id].chunk.js'
   },
   resolve: {
-    extensions: ['.js']
+    extensions: ['', '.js']
   },
   module: {
     loaders: [{
       test: /\.js$/,
-      loader: 'file',
+      loader: 'script-loader',
     }],
   },
 }];

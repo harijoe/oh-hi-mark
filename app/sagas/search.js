@@ -2,13 +2,11 @@ import { takeLatest } from 'redux-saga';
 import { call, put, select } from 'redux-saga/effects';
 import * as ActionTypes from '../constants/ActionTypes';
 import { setResults, setSelected } from '../actions/search';
-import store from '../services/documentStore/container';
-import Search from '../services/documentStore/search';
+import { searchEngine } from '../services/documentStore/container';
 import * as SearchSelectors from '../selectors/search';
 import * as CurrentSelectors from '../selectors/current';
 
 function* getResultsSaga(action) {
-  const searchEngine = new Search(store);
   const results = yield call(searchEngine.search, action.query);
   yield put(setResults(results));
   yield put(setSelected(0));

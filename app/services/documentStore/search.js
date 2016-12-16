@@ -21,13 +21,16 @@ const config = {
 export default class Search
 {
   constructor(documentStore = null) {
+    if (documentStore == null) {
+      return;
+    }
     this.init(documentStore);
     documentStore.addListener(() => this.init(documentStore));
   }
 
   init = (documentStore) => {
     this.documentStore = documentStore;
-    // this.fuse = new Fuse(Object.values(documentStore.getDocuments()), options);
+
     this.idx = elasticlunr((builder) => {
       builder.addField('id');
       builder.addField('title');
@@ -66,6 +69,6 @@ export default class Search
 
     return _.sortBy(Object.values(_.pick(
       this.documentStore.getDocuments(), results.map(res => res.ref))
-    ), 'score').reverse();
+    ), 'score').reverse().map(doc => _.pick(doc, ['id', 'title', 'url', 'favicon', 'date']));
   }
 }
